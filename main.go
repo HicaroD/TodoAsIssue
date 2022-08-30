@@ -24,6 +24,6 @@ func main() {
     }
 
     for _, token := range(tokens) {
-	fmt.Println(token.lexeme)
+	fmt.Printf("%s: '%s'\n", token.kind, token.lexeme)
     }
 }

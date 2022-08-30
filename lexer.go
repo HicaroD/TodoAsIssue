@@ -85,25 +85,33 @@ func (lexer *Lexer) get_issue_number() string {
 func (lexer *Lexer) tokenize() ([]Token, error) {
     var tokens []Token
     for !lexer.is_end_of_file {
+	fmt.Println(lexer.current_char)
+	// TODO: refactor switch case
 	switch(lexer.current_char) {
 	case '#':
 	    tokens = append(tokens, newToken(string(lexer.current_char), Hash))
+	    lexer.advance_cursor()
 	case ':':
 	    tokens = append(tokens, newToken(string(lexer.current_char), Colon))
+	    lexer.advance_cursor()
 	case '(':
 	    tokens = append(tokens, newToken(string(lexer.current_char), OpeningPar))
+	    lexer.advance_cursor()
 	case ')':
 	    tokens = append(tokens, newToken(string(lexer.current_char), ClosingPar))
+	    lexer.advance_cursor()
 	case '"':
 	    issue_body := lexer.get_issue_body()
 	    tokens = append(tokens, newToken(issue_body, IssueBody))
+	    lexer.advance_cursor()
 	default:
 	    if unicode.IsDigit(lexer.current_char) {
 		number := lexer.get_issue_number()
 		tokens = append(tokens, newToken(number, IssueNumber))
+	    } else {
+		lexer.advance_cursor()
 	    }
 	}
-	lexer.advance_cursor()
     }
     return tokens, nil
 }
