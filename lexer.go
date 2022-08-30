@@ -10,10 +10,12 @@ type TokenKind int
 const (
     IssueBody TokenKind = iota
     Hash
-    OpeningPar
-    ClosingPar
+    OpeningParenthesis
+    ClosingParenthesis
     IssueNumber
     Colon
+    OpeningSquareBracket
+    ClosingSquareBracket
 )
 
 func (token TokenKind) String() string {
@@ -22,10 +24,14 @@ func (token TokenKind) String() string {
 	return "IssueBody"
     case Hash:
 	return "Hash"
-    case OpeningPar:
+    case OpeningParenthesis:
 	return "OpeningPar"
-    case ClosingPar:
+    case ClosingParenthesis:
 	return "ClosingPar"
+    case OpeningSquareBracket:
+	return "OpeningSquareBracket"
+    case ClosingSquareBracket:
+	return "ClosingSquareBracket"
     case IssueNumber:
 	return "Number"
     case Colon:
@@ -95,10 +101,16 @@ func (lexer *Lexer) tokenize() ([]Token, error) {
 	    tokens = append(tokens, newToken(string(lexer.current_char), Colon))
 	    lexer.advance_cursor()
 	case '(':
-	    tokens = append(tokens, newToken(string(lexer.current_char), OpeningPar))
+	    tokens = append(tokens, newToken(string(lexer.current_char), OpeningParenthesis))
 	    lexer.advance_cursor()
 	case ')':
-	    tokens = append(tokens, newToken(string(lexer.current_char), ClosingPar))
+	    tokens = append(tokens, newToken(string(lexer.current_char), ClosingParenthesis))
+	    lexer.advance_cursor()
+	case '[':
+	    tokens = append(tokens, newToken(string(lexer.current_char), OpeningSquareBracket))
+	    lexer.advance_cursor()
+	case ']':
+	    tokens = append(tokens, newToken(string(lexer.current_char), ClosingSquareBracket))
 	    lexer.advance_cursor()
 	case '"':
 	    issue_body := lexer.get_issue_body()
