@@ -1,6 +1,10 @@
 package main
 
-type Todo struct{}
+type Todo struct {
+	Id          uint
+	Title       string
+	IsCompleted bool
+}
 
 type Parser struct {
 	cursor       uint
