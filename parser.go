@@ -2,8 +2,28 @@ package main
 
 type Todo struct{}
 
-type Parser struct{}
+type Parser struct {
+	cursor       uint
+	currentToken Token
+	tokens       []Token
+}
 
-func NewParser() *Parser {
-	return &Parser{}
+func NewParser(tokens []Token) *Parser {
+	return &Parser{cursor: 0, tokens: tokens}
+}
+
+func (parser *Parser) advanceCursor() {
+	if parser.cursor < uint(len(parser.tokens)) {
+		parser.currentToken = parser.tokens[parser.cursor]
+		parser.cursor++
+	}
+}
+
+func (parser *Parser) ParseTodos() []Todo {
+	var todos []Todo
+	for parser.cursor < uint(len(parser.tokens)) {
+		// TODO: Parse list of tokens into a list of TODOs
+		parser.advanceCursor()
+	}
+	return todos
 }
