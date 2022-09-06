@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"strconv"
+)
+
 type Todo struct {
 	Id          uint
 	Title       string
@@ -23,11 +28,90 @@ func (parser *Parser) advanceCursor() {
 	}
 }
 
-func (parser *Parser) ParseTodos() []Todo {
-	var todos []Todo
-	for parser.cursor < uint(len(parser.tokens)) {
-		// TODO: Parse list of tokens into a list of TODOs
+func (parser *Parser) parseToken(tokenKind TokenKind) error {
+	if parser.currentToken.kind != tokenKind {
+		return fmt.Errorf("error: invalid token ('%s', %s)", parser.currentToken.lexeme, parser.currentToken.kind)
+	}
+	return nil
+}
+
+func (parser *Parser) parseTodo() (*Todo, error) {
+	// TODO: refactor (maybe it is too repetitive and big?)
+	var err error
+
+	err = parser.parseToken(Hash)
+	if err != nil {
+		return nil, err
+	}
+	parser.advanceCursor()
+
+	err = parser.parseToken(OpeningParenthesis)
+	if err != nil {
+		return nil, err
+	}
+	parser.advanceCursor()
+
+	err = parser.parseToken(IssueNumber)
+	if err != nil {
+		return nil, err
+	}
+	id, err := strconv.Atoi(parser.currentToken.lexeme)
+	if err != nil {
+		return nil, err
+	}
+	parser.advanceCursor()
+
+	err = parser.parseToken(ClosingParenthesis)
+	if err != nil {
+		return nil, err
+	}
+	parser.advanceCursor()
+
+	err = parser.parseToken(OpeningSquareBracket)
+	if err != nil {
+		return nil, err
+	}
+	parser.advanceCursor()
+
+	isCompleted := false
+	if parser.currentToken.kind == CompletedMark {
+		isCompleted = true
 		parser.advanceCursor()
 	}
-	return todos
+	err = parser.parseToken(ClosingSquareBracket)
+	if err != nil {
+		return nil, err
+	}
+	parser.advanceCursor()
+
+	err = parser.parseToken(Colon)
+	if err != nil {
+		return nil, err
+	}
+	parser.advanceCursor()
+	err = parser.parseToken(IssueTitle)
+	if err != nil {
+		return nil, err
+	}
+	title := parser.currentToken.lexeme
+	parser.advanceCursor()
+
+	return &Todo{
+		Id:          uint(id),
+		Title:       title,
+		IsCompleted: isCompleted,
+	}, nil
+}
+
+func (parser *Parser) ParseTodos() ([]Todo, error) {
+	var todos []Todo
+	parser.advanceCursor()
+	for parser.cursor < uint(len(parser.tokens)) {
+		todo, err := parser.parseTodo()
+		if err != nil {
+			return nil, err
+		}
+		todos = append(todos, *todo)
+	}
+	return todos, nil
 }
