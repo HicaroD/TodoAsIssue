@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"unicode"
 )
 
 type TokenKind int
 
 const (
-	IssueBody TokenKind = iota
+	IssueTitle TokenKind = iota
 	Hash
 	OpeningParenthesis
 	ClosingParenthesis
@@ -16,12 +15,13 @@ const (
 	Colon
 	OpeningSquareBracket
 	ClosingSquareBracket
+	CompletedMark // X
 )
 
 func (token TokenKind) String() string {
 	switch token {
-	case IssueBody:
-		return "IssueBody"
+	case IssueTitle:
+		return "IssueTitle"
 	case Hash:
 		return "Hash"
 	case OpeningParenthesis:
@@ -36,6 +36,8 @@ func (token TokenKind) String() string {
 		return "Number"
 	case Colon:
 		return "Colon"
+	case CompletedMark:
+		return "CompletedMark"
 	}
 	return "unknown"
 }
@@ -81,18 +83,23 @@ func (lexer *Lexer) get_issue_body() string {
 func (lexer *Lexer) get_issue_number() string {
 	var number string
 	for unicode.IsDigit(lexer.current_char) && !lexer.is_end_of_file {
-		fmt.Printf("current char: %c\n", lexer.current_char)
 		number += string(lexer.current_char)
 		lexer.advance_cursor()
 	}
 	return number
 }
 
+func (lexer *Lexer) skipAnyWhitespace() {
+	if unicode.IsSpace(lexer.current_char) {
+		lexer.advance_cursor()
+	}
+}
+
 func (lexer *Lexer) tokenize() ([]Token, error) {
 	var tokens []Token
 	for !lexer.is_end_of_file {
-		fmt.Println(lexer.current_char)
-		// TODO: refactor switch case
+		// TODO: refactor switch case (if I need)
+		lexer.skipAnyWhitespace()
 		switch lexer.current_char {
 		case '#':
 			tokens = append(tokens, newToken(string(lexer.current_char), Hash))
@@ -114,12 +121,15 @@ func (lexer *Lexer) tokenize() ([]Token, error) {
 			lexer.advance_cursor()
 		case '"':
 			issue_body := lexer.get_issue_body()
-			tokens = append(tokens, newToken(issue_body, IssueBody))
+			tokens = append(tokens, newToken(issue_body, IssueTitle))
 			lexer.advance_cursor()
 		default:
 			if unicode.IsDigit(lexer.current_char) {
 				number := lexer.get_issue_number()
 				tokens = append(tokens, newToken(number, IssueNumber))
+			} else if lexer.current_char == 'X' {
+				tokens = append(tokens, newToken(string(lexer.current_char), CompletedMark))
+				lexer.advance_cursor()
 			} else {
 				lexer.advance_cursor()
 			}
