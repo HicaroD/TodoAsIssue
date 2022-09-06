@@ -12,8 +12,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	content := string(file)
-	if strings.TrimSpace(content) == "" {
+	content := strings.TrimSpace(string(file))
+	if content == "" {
 		log.Fatal(fmt.Errorf("file is empty"))
 	}
 
@@ -31,5 +31,12 @@ func main() {
 	}
 
 	parser := NewParser(tokens)
-	parser.ParseTodos()
+	todos, err := parser.ParseTodos()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, todo := range todos {
+		fmt.Println(todo.Title)
+	}
 }
