@@ -1,4 +1,4 @@
-# 🎸 MusicPlayer
+# :guitar: MusicPlayer
 
 ## Sumário
 
