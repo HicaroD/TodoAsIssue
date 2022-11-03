@@ -7,10 +7,13 @@
 3. [Licença](#licença)
 
 ## Descrição
-Um tocador de música simples escrito em Flutter / Dart.
+Um simples music player escrito em Flutter / Dart.
 
 ## Funcionalidades
-TODO
+**Obs.: Essa lista certamente irá mudar ao longo do tempo**
+
+- [ ] Reproduzir músicas presentes em seu armazenamento local
+- [ ] Capacidade de procurar por letras de músicas
 
 ## Licença
 Esse projeto está licenciado sob a licença do MIT. Veja [LICENSE](./LICENSE).
