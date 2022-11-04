@@ -3,9 +3,9 @@
 ## Summary
 
 1. [Description](#description)
-1. [Installation](#installation)
-2. [Project structure](#project-structure)
-3. [License](#license)
+2. [Installation](#installation)
+3. [Project structure](#project-structure)
+4. [License](#license)
 
 ## Description
 
