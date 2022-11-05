@@ -34,7 +34,8 @@ First of all, on your project root folder, create a file called `todo.json` and 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
 ## Project architecture
-Todo: Describe what each file means.
+- [`lib/core`](./lib/core/): Code that is common across all the source code.
+- [`lib/utils`](./lib/utils/): Utility code
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
