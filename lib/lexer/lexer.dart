@@ -8,7 +8,7 @@ class Lexer {
 
   Lexer(this.fileContent);
 
-  void advance_cursor() {
+  void advanceCursor() {
     if (cursor < fileContent.length - 1) {
       current_character = fileContent[cursor];
       cursor++;
@@ -20,7 +20,7 @@ class Lexer {
   List<Token> tokenize() {
     List<Token> tokens = [];
     while (!isEndOfFile) {
-      advance_cursor();
+      advanceCursor();
       print(current_character);
     }
     return tokens;
