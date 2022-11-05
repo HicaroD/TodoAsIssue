@@ -36,6 +36,8 @@ First of all, on your project root folder, create a file called `todo.json` and 
 ## Project architecture
 - [`lib/core`](./lib/core/): Code that is common across all the source code.
 - [`lib/utils`](./lib/utils/): Utility code
+- [`lib/lexer`](./lib/lexer/): Tool for converting a text file into a list of tokens
+- [`lib/parser`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
