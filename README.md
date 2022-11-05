@@ -4,7 +4,7 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
-3. [Project structure](#project-structure)
+3. [Project architecture](#project-architecture)
 4. [License](#license)
 
 ## Description
@@ -33,8 +33,9 @@ First of all, on your project root folder, create a file called `todo.json` and 
 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
-## Project structure
-Todo: Describe what each file means.
+## Project architecture
+- [`lib/core`](./lib/core/): Code that is common across all the source code.
+- [`lib/utils`](./lib/utils/): Utility code
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
