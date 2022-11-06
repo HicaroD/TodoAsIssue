@@ -108,7 +108,7 @@ class Lexer {
                 number += currentCharacter;
                 advanceCursor();
               }
-              tokens.add(Token(TokenKind.Number, number));
+              tokens.add(Token(TokenKind.number, number));
             } else {
               print("ERROR: Unknown token: $currentCharacter");
               exit(1);
