@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:todo_as_issue/lexer/lexer.dart';
+import 'package:todo_as_issue/lexer/tokens.dart';
 
 Future<Map<String, dynamic>> getConfigFile() async {
   String path = 'todo.json';
@@ -26,8 +27,12 @@ Future<String> getTodoFile(String filePath) async {
 }
 
 void main(List<String> args) async {
-  Map<String, dynamic> configJsonFile = await getConfigFile();
-  String todoFile = await getTodoFile('examples/todo.txt');
-  Lexer lexer = Lexer(todoFile);
-  print(configJsonFile["owner"]);
+  File file = File('examples/todo.txt');
+  String content = await file.readAsString();
+  Lexer lexer = Lexer(content);
+  List<Token> tokens = lexer.tokenize();
+
+  for (Token token in tokens) {
+    print(token);
+  }
 }
