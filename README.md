@@ -38,7 +38,7 @@ First of all, on your project root folder, create a file called `todo.json` and 
 
 ## Project architecture
 -  [`lib/core`](./lib/core/): Code that is common across all the source code.
--  [lib/core/http_client](./lib/core/http_client/): Implementation of an HTTP Client using [`http`](https://pub.dev/packages/http) package.
+-  [`lib/core/http_client`](./lib/core/http_client/): Implementation of an HTTP Client using [`http`](https://pub.dev/packages/http) package.
 -  [`lib/lexer`](./lib/lexer/): Tool for converting a text file into a list of tokens
 -  [`lib/parser`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
 -  [`lib/utils`](./lib/utils/): Utility code
