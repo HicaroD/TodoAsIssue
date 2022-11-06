@@ -5,7 +5,8 @@
 1. [Description](#description)
 2. [Installation](#installation)
 3. [Project architecture](#project-architecture)
-4. [License](#license)
+4. [Design patterns used](#design-patterns-used)
+5. [License](#license)
 
 ## Description
 
@@ -36,10 +37,14 @@ First of all, on your project root folder, create a file called `todo.json` and 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
 ## Project architecture
-- [`lib/core`](./lib/core/): Code that is common across all the source code.
-- [`lib/utils`](./lib/utils/): Utility code
-- [`lib/lexer`](./lib/lexer/): Tool for converting a text file into a list of tokens
-- [`lib/parser`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
+-  [`lib/core`](./lib/core/): Code that is common across all the source code.
+-  [lib/core/http_client](./lib/core/http_client/): Implementation of an HTTP Client using [`http`](https://pub.dev/packages/http) package.
+-  [`lib/lexer`](./lib/lexer/): Tool for converting a text file into a list of tokens
+-  [`lib/parser`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
+-  [`lib/utils`](./lib/utils/): Utility code
+
+## Design patterns used
+TODO
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
