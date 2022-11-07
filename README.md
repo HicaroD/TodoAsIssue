@@ -42,7 +42,10 @@ First of all, on your project root folder, create a file called `todo.json` and 
 -  [`lib/utils`](./lib/utils/): Utility code
 
 ## Design patterns used
-TODO
+
+- [Iterator](https://refactoring.guru/design-patterns/iterator)
+
+    Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/fef632e69eddb22b94ad1270d8bff52b943fe969/lib/parser/parser.dart#L4).
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
