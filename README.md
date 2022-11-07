@@ -47,5 +47,9 @@ First of all, on your project root folder, create a file called `todo.json` and 
 
     Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/fef632e69eddb22b94ad1270d8bff52b943fe969/lib/parser/parser.dart#L4).
 
+- [Singleton](https://refactoring.guru/design-patterns/singleton)
+
+    Singleton pattern was used on the implementation of open source plataforms, such as GitHub and GitLab. I decided to use it because I didn't want to have more than one instance of each platform on my program, it should be unique, makes no sense to have more than one of these.
+
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
