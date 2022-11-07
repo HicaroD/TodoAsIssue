@@ -29,7 +29,6 @@ class Lexer {
 
     while (!isEndOfFile) {
       skipWhitespaces();
-      print(currentCharacter);
 
       switch (currentCharacter) {
         case "[":
@@ -40,7 +39,7 @@ class Lexer {
           }
         case "]":
           {
-            tokens.add(Token(TokenKind.openingSquareBracket, currentCharacter));
+            tokens.add(Token(TokenKind.closingSquareBracket, currentCharacter));
             advanceCursor();
             break;
           }
