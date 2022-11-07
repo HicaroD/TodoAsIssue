@@ -1,6 +1,12 @@
 class Todo {
-  final bool isOpen;
+  final int id;
+  final bool isClosed;
   final String title;
 
-  Todo({required this.isOpen, required this.title});
+  Todo({required this.id, required this.isClosed, required this.title});
+
+  @override
+  String toString() {
+    return "($id)[$isClosed]('$title')";
+  }
 }
