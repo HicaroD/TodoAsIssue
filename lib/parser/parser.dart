@@ -37,6 +37,7 @@ class Parser {
     TokenIterator iterator = TokenIterator(tokens);
 
     while (iterator.hasNext()) {
+      // TODO: try to refactor this while-loop
       if (iterator.current.kind != TokenKind.hashSymbol) {
         errorReporter.reportError(iterator.current);
       }
