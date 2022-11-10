@@ -27,7 +27,6 @@ class GitHub extends OpenSourcePlatform {
 
     Map<String, String> body = {
       "title": todo.title,
-      "state": todo.isClosed ? "closed" : "open",
     };
 
     HttpResponse response =
