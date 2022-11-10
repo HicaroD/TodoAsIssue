@@ -30,6 +30,8 @@ First of all, on your project root folder, create a file called `todo.json` and 
 }
 ```
 
+After that, you can create a file called `todo.txt` in the project root folder to insert all your TODOs. For more informations and examples about how to create a TODO file, go [here](./examples/).
+
 `TODOasIssue` must have these informations to make things work.
 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
