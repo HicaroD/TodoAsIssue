@@ -39,6 +39,10 @@ void main(List<String> args) async {
 
   Parser parser = Parser(tokens);
   List<Todo> todos = parser.parse();
+  
+  for (Todo todo in todos) {
+    print(todo);
+  }
 
   GitHub github = GitHub.instance;
   API api = API(github);
