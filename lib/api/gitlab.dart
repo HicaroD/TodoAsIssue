@@ -7,7 +7,7 @@ class GitLab extends OpenSourcePlatform {
   static get inst => _singleton;
 
   @override
-  void createIssue(Todo todo) {
+  void createIssue(Todo todo, Map<String, dynamic> configuration) {
     // TODO: implement createIssue
   }
 }
