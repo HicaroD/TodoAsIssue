@@ -53,7 +53,7 @@ First of all, on your project root folder, create a file called `todo.json` and 
 
 - [Strategy](https://refactoring.guru/design-patterns/strategy)
  
-    Strategy pattern was used on the implementation of open source platforms as well. I decided to do this because we can have more than one kind of open source platforms, such as GitHub and GitLab. Therefore we can change the "strategy" to another open source platform. You can check it out... .
+    Strategy pattern was used on the implementation of open source platforms as well. I decided to do this because we can have more than one kind of open source platforms, such as GitHub and GitLab. Therefore we can change the "strategy" to another open source platform. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/tree/feature/api_communication/lib/api).
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
