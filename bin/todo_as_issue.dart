@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:todo_as_issue/api/api.dart';
 import 'package:todo_as_issue/api/github.dart';
 import 'package:todo_as_issue/lexer/lexer.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
@@ -31,7 +32,7 @@ Future<String> getTodoFile(String filePath) async {
 
 void main(List<String> args) async {
   String todoFile = await getTodoFile("examples/todo.txt");
-  Map<String, dynamic> settingsAsJson = await getConfigFile();
+  Map<String, dynamic> configAsJson = await getConfigFile();
 
   Lexer lexer = Lexer(todoFile);
   List<Token> tokens = lexer.tokenize();
@@ -40,4 +41,7 @@ void main(List<String> args) async {
   List<Todo> todos = parser.parse();
 
   GitHub github = GitHub.instance;
+  API api = API(github);
+
+  api.createIssues(todos, configAsJson);
 }
