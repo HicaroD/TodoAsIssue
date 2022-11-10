@@ -35,6 +35,7 @@ First of all, on your project root folder, create a file called `todo.json` and 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
 ## Project architecture
+-  [`lib/api`](./lib/api/): Code that is related to the API's communication.
 -  [`lib/core`](./lib/core/): Code that is common across all the source code.
    -  [`lib/core/http_client`](./lib/core/http_client/): Implementation of an HTTP Client using [`http`](https://pub.dev/packages/http) package.
 -  [`lib/lexer`](./lib/lexer/): Tool for converting a text file into a list of tokens
