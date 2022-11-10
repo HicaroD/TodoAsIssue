@@ -1,1 +1,1 @@
-const String BASE_URL = "api.github.com/";
+const String GITHUB_BASE_URL = "api.github.com";

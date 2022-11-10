@@ -47,5 +47,13 @@ First of all, on your project root folder, create a file called `todo.json` and 
 
     Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/fef632e69eddb22b94ad1270d8bff52b943fe969/lib/parser/parser.dart#L4).
 
+- [Singleton](https://refactoring.guru/design-patterns/singleton)
+
+    Singleton pattern was used on the implementation of open source platforms, such as GitHub and GitLab. I decided to use it because I didn't want to have more than one instance of each platform on my program, it should be unique, makes no sense to have more than one of these. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/63b0ba0bfb07eb3eb1a8394c0e8cd038981c9915/lib/api/github.dart#L1) and [here](https://github.com/HicaroD/TodoAsIssue/blob/aa5793998675dff1a9ab2f76de3082f69c36d8b9/lib/api/gitlab.dart#L1).
+
+- [Strategy](https://refactoring.guru/design-patterns/strategy)
+ 
+    Strategy pattern was used on the implementation of open source platforms as well. I decided to do this because we can have more than one kind of open source platforms, such as GitHub and GitLab. Therefore we can change the "strategy" to another open source platform. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/tree/feature/api_communication/lib/api).
+
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
