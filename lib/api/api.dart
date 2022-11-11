@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:todo_as_issue/api/opensource_platform.dart';
 
 import '../parser/todo.dart';
+import '../utils/configuration.dart';
 
 class API {
   OpenSourcePlatform _openSourcePlatform;
@@ -13,8 +14,7 @@ class API {
     _openSourcePlatform = openSourcePlatform;
   }
 
-  void createIssues(
-      List<Todo> todos, Map<String, dynamic> configuration) async {
+  void createIssues(List<Todo> todos, Configuration configuration) async {
     for (Todo todo in todos) {
       _openSourcePlatform.createIssue(todo, configuration);
     }
