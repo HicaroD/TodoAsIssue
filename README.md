@@ -58,5 +58,9 @@ After that, you can create a file called `todo.txt` in the project root folder t
  
     Strategy pattern was used on the implementation of open source platforms as well. I decided to do this because we can have more than one kind of open source platforms, such as GitHub and GitLab. Therefore we can change the "strategy" to another open source platform. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/tree/feature/api_communication/lib/api).
 
+- [Facade](https://refactoring.guru/design-patterns/facade)
+
+    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade".
+
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).

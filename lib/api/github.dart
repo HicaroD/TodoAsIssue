@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:todo_as_issue/api/opensource_platform.dart';
 import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/parser/todo.dart';
+import 'package:todo_as_issue/utils/configuration.dart';
 import 'package:todo_as_issue/utils/endpoints.dart';
 
 import '../core/http_client/http_client_interface.dart';
@@ -14,16 +15,19 @@ class GitHub extends OpenSourcePlatform {
 
   final HttpClient _httpClient = HttpClient(baseUrl: GITHUB_BASE_URL);
 
+  Map<String, String> getHeaders(Configuration configuration) {
+    return {
+      "accept": "application/vnd.github+json",
+      "Authorization": "Bearer ${configuration.token}"
+    };
+  }
+
   @override
-  void createIssue(Todo todo, Map<String, dynamic> configuration) async {
-    String url =
-        "/repos/${configuration["owner"]}/${configuration["repo_name"]}/issues";
+  void createIssue(Todo todo, Configuration configuration) async {
+    String url = "/repos/${configuration.owner}/${configuration.owner}/issues";
     print(url);
 
-    Map<String, String> headers = {
-      "accept": "application/vnd.github+json",
-      "Authorization": "Bearer ${configuration["token"]}"
-    };
+    Map<String, String> headers = getHeaders(configuration);
 
     Map<String, String> body = {
       "title": todo.title,
