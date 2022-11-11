@@ -62,7 +62,7 @@ After that, you can create a file called `todo.txt` in the project root folder t
 
 - [Iterator](https://refactoring.guru/design-patterns/iterator)
 
-    Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/fef632e69eddb22b94ad1270d8bff52b943fe969/lib/parser/parser.dart#L4).
+    Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. Additionally, even though Dart provides a built-in iterator for `List`, Dart doesn't offer me a method called `hasNext()` to check if there is a next element to iterate, that's why I implemented this pattern, just for building this method by myself. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/fef632e69eddb22b94ad1270d8bff52b943fe969/lib/parser/parser.dart#L4).
 
 - [Singleton](https://refactoring.guru/design-patterns/singleton)
 
