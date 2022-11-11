@@ -38,11 +38,25 @@ After that, you can create a file called `todo.txt` in the project root folder t
 
 ## Project architecture
 -  [`lib/api`](./lib/api/): Code that is related to the API's communication.
+   - [`lib/api/api.dart`](./lib/api/api.dart): TODO
+   - [`lib/api/github.dart`](./lib/api/github.dart): TODO
+   - [`lib/api/gitlab.dart`](./lib/api/github.dart): TODO
+   - [`lib/api/opensource_platform.dart`](./lib/api/opensource_platform.dart): TODO
 -  [`lib/core`](./lib/core/): Code that is common across all the source code.
-   -  [`lib/core/http_client`](./lib/core/http_client/): Implementation of an HTTP Client using [`http`](https://pub.dev/packages/http) package.
+   - [`lib/core/http_client`](./lib/core/http_client/): Implementation of an HTTP Client using [`http`](https://pub.dev/packages/http) package.
+     - [`lib/core/http_client/http_client_interface.dart`](./lib/core/http_client/http_client_interface.dart): TODO
+     - [`lib/core/http_client/http_client.dart`](./lib/core/http_client/http_client.dart): TODO
 -  [`lib/lexer`](./lib/lexer/): Tool for converting a text file into a list of tokens
+   -  [`lib/lexer/lexer.dart`](./lib/lexer/lexer.dart): TODO
+   -  [`lib/lexer/tokens.dart`](./lib/lexer/tokens.dart): TODO
 -  [`lib/parser`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
+   - [`lib/parser/error_reporter.dart`](./lib/parser/error_reporter.dart): TODO
+   - [`lib/parser/parser.dart`](./lib/parser/parser.dart): TODO
+   - [`lib/parser/todo.dart`](./lib/parser/todo.dart): TODO
 -  [`lib/utils`](./lib/utils/): Utility code
+   -  [`lib/utils/configuration.dart`](./lib/utils/configuration.dart): TODO
+   -  [`lib/utils/endpoints.dart`](./lib/utils/endpoints.dart): TODO
+   -  [`lib/utils/reader.dart`](./lib/utils/reader.dart): TODO
 
 ## Design patterns used
 
