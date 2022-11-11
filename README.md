@@ -60,7 +60,7 @@ After that, you can create a file called `todo.txt` in the project root folder t
 
 - [Facade](https://refactoring.guru/design-patterns/facade)
 
-    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an actual facade. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade".
+    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade".
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
