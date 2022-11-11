@@ -11,7 +11,10 @@ import '../core/http_client/http_client_interface.dart';
 class GitHub extends OpenSourcePlatform {
   GitHub._internal();
   static final GitHub _singleton = GitHub._internal();
-  static get instance => _singleton;
+
+  factory GitHub() {
+    return _singleton;
+  }
 
   final HttpClient _httpClient = HttpClient(baseUrl: GITHUB_BASE_URL);
 

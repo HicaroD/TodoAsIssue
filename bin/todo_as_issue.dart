@@ -25,7 +25,7 @@ class TodoAsIssue {
     List<Todo> todos = parser.parse();
 
     // TODO: implementar interface para fazer usuário decidir entre GitHub ou GitLab
-    GitHub github = GitHub.instance;
+    GitHub github = GitHub();
     API api = API(github);
 
     api.createIssues(todos, configuration);
