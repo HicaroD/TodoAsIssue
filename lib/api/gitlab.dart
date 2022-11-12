@@ -5,7 +5,10 @@ import 'package:todo_as_issue/utils/configuration.dart';
 class GitLab extends OpenSourcePlatform {
   GitLab._internal();
   static final GitLab _singleton = GitLab._internal();
-  static get instance => _singleton;
+
+  factory GitLab() {
+    return _singleton;
+  }
 
   @override
   void createIssue(Todo todo, Configuration configuration) {

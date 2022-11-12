@@ -11,7 +11,10 @@ import '../core/http_client/http_client_interface.dart';
 class GitHub extends OpenSourcePlatform {
   GitHub._internal();
   static final GitHub _singleton = GitHub._internal();
-  static get instance => _singleton;
+
+  factory GitHub() {
+    return _singleton;
+  }
 
   final HttpClient _httpClient = HttpClient(baseUrl: GITHUB_BASE_URL);
 
@@ -24,7 +27,8 @@ class GitHub extends OpenSourcePlatform {
 
   @override
   void createIssue(Todo todo, Configuration configuration) async {
-    String url = "/repos/${configuration.owner}/${configuration.owner}/issues";
+    String url =
+        "/repos/${configuration.owner}/${configuration.repoName}/issues";
     print(url);
 
     Map<String, String> headers = getHeaders(configuration);
