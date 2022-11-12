@@ -37,17 +37,14 @@ class TodoAsIssue {
   }
 }
 
-OpenSourcePlatform getPlatformFromCommandLine(List<String> args) {
-  ArgParser parser = ArgParser();
-  parser.addOption("platform", abbr: "p", defaultsTo: "github");
-  ArgResults results = parser.parse(args);
-
+OpenSourcePlatform getOpenSourcePlatform(Configuration configuration) {
   OpenSourcePlatform openSourcePlatform = GitHub();
-
-  if (results["platform"] == "gitlab") {
+  if (configuration.platform == "gitlab") {
     openSourcePlatform = GitLab();
+  } else if (configuration.platform != "github") {
+    print("Unsupported platform '${configuration.platform}'");
+    exit(1);
   }
-
   return openSourcePlatform;
 }
 
@@ -55,7 +52,7 @@ void main(List<String> args) async {
   String todoFile = await Reader.getTodoFile("examples/todo.txt");
   Map<String, dynamic> configAsJson = await Reader.getConfigFile();
   Configuration configuration = Configuration.fromJson(configAsJson);
-  OpenSourcePlatform openSourcePlatform = getPlatformFromCommandLine(args);
+  OpenSourcePlatform openSourcePlatform = getOpenSourcePlatform(configuration);
 
   TodoAsIssue todoAsIssue = TodoAsIssue(
       todoFile: todoFile,
