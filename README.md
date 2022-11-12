@@ -27,10 +27,12 @@ First of all, on your project root folder, create a file called `todo.json` and 
 {
     "owner": "YOUR_GITHUB_USERNAME",
     "repo_name": "YOUR_GITHUB_REPOSITORY_NAME",
-    "platform": "github",
+    "platform": "YOUR_OPEN_SOURCE_PLATFORM",
     "token": "YOUR_PRIVATE_TOKEN"
 }
 ```
+
+In `platform` field, you can use `github` or `gitlab`.
 
 After that, you can create a file called `todo.txt` in the project root folder to insert all your TODOs. For more informations and examples about how to create a TODO file, go [here](./examples/).
 
