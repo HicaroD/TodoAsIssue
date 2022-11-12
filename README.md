@@ -39,7 +39,7 @@ After that, you can create a file called `todo.txt` in the project root folder t
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
 ## Usage
-After setting up everything above, you are allowed to run the program. By default, GitHub is the main platform, but you can use the flag `--platform` or `-p` with the value `gitlab` to change the platform.
+If everything above is configured, you're allowed to run the program.
 
 ## Project architecture
 -  [`lib/api`](./lib/api/): Code that is related to the API's communication.
