@@ -27,6 +27,7 @@ First of all, on your project root folder, create a file called `todo.json` and 
 {
     "owner": "YOUR_GITHUB_USERNAME",
     "repo_name": "YOUR_GITHUB_REPOSITORY_NAME",
+    "platform": "github",
     "token": "YOUR_PRIVATE_TOKEN"
 }
 ```
