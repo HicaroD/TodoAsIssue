@@ -61,5 +61,6 @@ void main(List<String> args) async {
       todoFile: todoFile,
       configuration: configuration,
       openSourcePlatform: openSourcePlatform);
+
   todoAsIssue.run();
 }

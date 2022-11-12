@@ -27,7 +27,8 @@ class GitHub extends OpenSourcePlatform {
 
   @override
   void createIssue(Todo todo, Configuration configuration) async {
-    String url = "/repos/${configuration.owner}/${configuration.owner}/issues";
+    String url =
+        "/repos/${configuration.owner}/${configuration.repoName}/issues";
     print(url);
 
     Map<String, String> headers = getHeaders(configuration);
