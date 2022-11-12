@@ -44,7 +44,7 @@ OpenSourcePlatform getPlatformFromCommandLine(List<String> args) {
 
   OpenSourcePlatform openSourcePlatform = GitHub();
 
-  if (results["platform"] == "Gitlab") {
+  if (results["platform"] == "gitlab") {
     openSourcePlatform = GitLab();
   }
 
