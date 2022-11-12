@@ -4,9 +4,10 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
-3. [Project architecture](#project-architecture)
-4. [Design patterns used](#design-patterns-used)
-5. [License](#license)
+3. [Usage](#usage)
+4. [Project architecture](#project-architecture)
+5. [Design patterns used](#design-patterns-used)
+6. [License](#license)
 
 ## Description
 
@@ -26,6 +27,7 @@ First of all, on your project root folder, create a file called `todo.json` and 
 {
     "owner": "YOUR_GITHUB_USERNAME",
     "repo_name": "YOUR_GITHUB_REPOSITORY_NAME",
+    "platform": "github",
     "token": "YOUR_PRIVATE_TOKEN"
 }
 ```
@@ -35,6 +37,9 @@ After that, you can create a file called `todo.txt` in the project root folder t
 `TODOasIssue` must have these informations to make things work.
 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
+
+## Usage
+After setting up everything above, you are allowed to run the program. By default, GitHub is the main platform, but you can use the flag `--platform` or `-p` with the value `gitlab` to change the platform.
 
 ## Project architecture
 -  [`lib/api`](./lib/api/): Code that is related to the API's communication.
