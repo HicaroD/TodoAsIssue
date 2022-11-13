@@ -64,9 +64,9 @@ class Parser {
       }
       iterator.moveNext();
 
-      bool isClosed = false;
+      bool wasPosted = false;
       if (iterator.current.kind == TokenKind.tilde) {
-        isClosed = true;
+        wasPosted = true;
         iterator.moveNext();
       }
 
@@ -92,7 +92,7 @@ class Parser {
 
       if (iterator.hasNext()) iterator.moveNext();
 
-      Todo todo = Todo(id: todoId, isClosed: isClosed, title: issueTitle);
+      Todo todo = Todo(id: todoId, wasPosted: wasPosted, title: issueTitle);
       todos.add(todo);
     }
     return todos;
