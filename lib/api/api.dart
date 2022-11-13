@@ -23,6 +23,7 @@ class API {
 
         if (response.statusCode != 201) {
           print("Error: Can't create issue");
+          // TODO: improve error handling
           print(response.statusCode);
           print(response.body);
           exit(1);
