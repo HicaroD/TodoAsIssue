@@ -14,8 +14,8 @@
 From a list of TODOs to a list of issues on your GitHub or GitLab repository.
 
 ```
-#(1)[~]: "This is my first TODO and it is completed"
-#(2)[]: "This is my second TODO and it is not completed"
+#(1)[~]: "This is my first TODO"
+#(2)[]: "This is my second TODO"
 ```
 
 GitHub and Gitlab projects can have issues created by developers / users to report errors, bugs and etcetera. The idea of building `TODOasIssue` is to automate the creation of issues locally by writing everything that you need in a simple text file and publishing it to your GitHub / GitLab project without even opening your browser to do that.
@@ -41,7 +41,7 @@ After that, you can create a file called `todo.txt` in the project root folder t
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
 ## Usage
-If everything above is configured, you're allowed to run the program.
+If everything above is configured, you're allowed to run the program. If you're not understanding the usage of `[]` or `[~]`, it is just a mark for checking if the TODO was posted or not on GitHub / GitLab. If it is marked, then it is gonna be ignored by `TodoAsIssue`, it is useful to avoid duplicated issues.
 
 ## Project architecture
 -  [`lib/api`](./lib/api/): Code that is related to the API's communication.
