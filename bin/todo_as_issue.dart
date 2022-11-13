@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:args/args.dart';
 import 'package:todo_as_issue/api/api.dart';
 import 'package:todo_as_issue/api/github.dart';
 import 'package:todo_as_issue/api/gitlab.dart';
