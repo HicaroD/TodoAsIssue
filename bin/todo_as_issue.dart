@@ -16,7 +16,7 @@ class TodoAsIssue {
   late API api;
   final Configuration configuration;
   final String todoFile;
-  final OpenSourcePlatform openSourcePlatform;
+  final IOpenSourcePlatform openSourcePlatform;
 
   TodoAsIssue({
     required this.todoFile,
@@ -36,8 +36,8 @@ class TodoAsIssue {
   }
 }
 
-OpenSourcePlatform getOpenSourcePlatform(Configuration configuration) {
-  OpenSourcePlatform openSourcePlatform = GitHub();
+IOpenSourcePlatform getOpenSourcePlatform(Configuration configuration) {
+  IOpenSourcePlatform openSourcePlatform = GitHub();
   if (configuration.platform == "gitlab") {
     openSourcePlatform = GitLab();
   } else if (configuration.platform != "github") {
@@ -51,7 +51,7 @@ void main(List<String> args) async {
   String todoFile = await Reader.getTodoFile("examples/todo.txt");
   Map<String, dynamic> configAsJson = await Reader.getConfigFile();
   Configuration configuration = Configuration.fromJson(configAsJson);
-  OpenSourcePlatform openSourcePlatform = getOpenSourcePlatform(configuration);
+  IOpenSourcePlatform openSourcePlatform = getOpenSourcePlatform(configuration);
 
   TodoAsIssue todoAsIssue = TodoAsIssue(
     todoFile: todoFile,

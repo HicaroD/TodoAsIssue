@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:todo_as_issue/api/opensource_platform.dart';
 import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/parser/todo.dart';
@@ -8,7 +6,7 @@ import 'package:todo_as_issue/utils/endpoints.dart';
 
 import '../core/http_client/http_client_interface.dart';
 
-class GitHub extends OpenSourcePlatform {
+class GitHub extends IOpenSourcePlatform {
   GitHub._internal();
   static final GitHub _singleton = GitHub._internal();
 
