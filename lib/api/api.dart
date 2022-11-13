@@ -7,11 +7,11 @@ import '../parser/todo.dart';
 import '../utils/configuration.dart';
 
 class API {
-  OpenSourcePlatform _openSourcePlatform;
+  IOpenSourcePlatform _openSourcePlatform;
 
   API(this._openSourcePlatform);
 
-  set openSourcePlatform(OpenSourcePlatform openSourcePlatform) {
+  set openSourcePlatform(IOpenSourcePlatform openSourcePlatform) {
     _openSourcePlatform = openSourcePlatform;
   }
 
@@ -23,15 +23,14 @@ class API {
 
         if (response.statusCode != 201) {
           print("Error: Can't create issue");
-          // TODO: improve error handling
           print(response.statusCode);
           print(response.body);
           exit(1);
         }
         print("🎉 Issue was created successfully 🎉");
+        // This is useful for avoiding problems with GitHub's rate limit policies
+        sleep(Duration(seconds: 2));
       }
     }
-    // This is useful for avoiding problems with GitHub's rate limit policies
-    sleep(Duration(seconds: 2));
   }
 }

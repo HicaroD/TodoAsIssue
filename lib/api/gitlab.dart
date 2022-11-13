@@ -3,7 +3,7 @@ import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
 import 'package:todo_as_issue/parser/todo.dart';
 import 'package:todo_as_issue/utils/configuration.dart';
 
-class GitLab extends OpenSourcePlatform {
+class GitLab extends IOpenSourcePlatform {
   GitLab._internal();
   static final GitLab _singleton = GitLab._internal();
 
