@@ -56,9 +56,10 @@ void main(List<String> args) async {
   OpenSourcePlatform openSourcePlatform = getOpenSourcePlatform(configuration);
 
   TodoAsIssue todoAsIssue = TodoAsIssue(
-      todoFile: todoFile,
-      configuration: configuration,
-      openSourcePlatform: openSourcePlatform);
+    todoFile: todoFile,
+    configuration: configuration,
+    openSourcePlatform: openSourcePlatform,
+  );
 
   todoAsIssue.run();
 }
