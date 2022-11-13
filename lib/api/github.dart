@@ -26,7 +26,8 @@ class GitHub extends OpenSourcePlatform {
   }
 
   @override
-  void createIssue(Todo todo, Configuration configuration) async {
+  Future<HttpResponse> createIssue(
+      Todo todo, Configuration configuration) async {
     String url =
         "/repos/${configuration.owner}/${configuration.repoName}/issues";
     print(url);
@@ -40,13 +41,6 @@ class GitHub extends OpenSourcePlatform {
     HttpResponse response =
         await _httpClient.post(url, headers: headers, body: body);
 
-    if (response.statusCode != 201) {
-      print(response.statusCode);
-      print(response.body);
-      print(
-          "ERROR: Can't create an issue. Message from API: ${response.body["message"]}");
-      exit(1);
-    }
-    print("🎉 Issue ${todo.id} was created successfully 🎉");
+    return response;
   }
 }
