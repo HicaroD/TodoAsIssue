@@ -4,9 +4,10 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
-3. [Project architecture](#project-architecture)
-4. [Design patterns used](#design-patterns-used)
-5. [License](#license)
+3. [Usage](#usage)
+4. [Project architecture](#project-architecture)
+5. [Design patterns used](#design-patterns-used)
+6. [License](#license)
 
 ## Description
 
@@ -26,15 +27,21 @@ First of all, on your project root folder, create a file called `todo.json` and 
 {
     "owner": "YOUR_GITHUB_USERNAME",
     "repo_name": "YOUR_GITHUB_REPOSITORY_NAME",
+    "platform": "YOUR_OPEN_SOURCE_PLATFORM",
     "token": "YOUR_PRIVATE_TOKEN"
 }
 ```
+
+In `platform` field, you can use `github` or `gitlab`.
 
 After that, you can create a file called `todo.txt` in the project root folder to insert all your TODOs. For more informations and examples about how to create a TODO file, go [here](./examples/).
 
 `TODOasIssue` must have these informations to make things work.
 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
+
+## Usage
+If everything above is configured, you're allowed to run the program.
 
 ## Project architecture
 -  [`lib/api`](./lib/api/): Code that is related to the API's communication.
@@ -74,7 +81,7 @@ After that, you can create a file called `todo.txt` in the project root folder t
 
 - [Facade](https://refactoring.guru/design-patterns/facade)
 
-    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade".
+    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade". You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/5158fd87eab23af42102752c7a57667ddb02c498/bin/todo_as_issue.dart#L12).
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).

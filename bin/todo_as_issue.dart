@@ -1,7 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:todo_as_issue/api/api.dart';
 import 'package:todo_as_issue/api/github.dart';
+import 'package:todo_as_issue/api/gitlab.dart';
+import 'package:todo_as_issue/api/opensource_platform.dart';
 import 'package:todo_as_issue/lexer/lexer.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
 import 'package:todo_as_issue/parser/parser.dart';
@@ -15,8 +16,13 @@ class TodoAsIssue {
   late API api;
   final Configuration configuration;
   final String todoFile;
+  final IOpenSourcePlatform openSourcePlatform;
 
-  TodoAsIssue({required this.todoFile, required this.configuration});
+  TodoAsIssue({
+    required this.todoFile,
+    required this.configuration,
+    required this.openSourcePlatform,
+  });
 
   void run() async {
     lexer = Lexer(todoFile);
@@ -24,43 +30,34 @@ class TodoAsIssue {
     parser = Parser(tokens);
     List<Todo> todos = parser.parse();
 
-    // TODO: implementar interface para fazer usuário decidir entre GitHub ou GitLab
-    GitHub github = GitHub.instance;
-    API api = API(github);
+    API api = API(openSourcePlatform);
 
     api.createIssues(todos, configuration);
   }
 }
 
-Future<Map<String, dynamic>> getConfigFile() async {
-  String path = 'todo.json';
-  File jsonFile = File(path);
-
-  if (!await jsonFile.exists()) {
-    print(
-        "ERROR: Configuration file 'todo.json' not found on project root folder");
+IOpenSourcePlatform getOpenSourcePlatform(Configuration configuration) {
+  IOpenSourcePlatform openSourcePlatform = GitHub();
+  if (configuration.platform == "gitlab") {
+    openSourcePlatform = GitLab();
+  } else if (configuration.platform != "github") {
+    print("Unsupported platform '${configuration.platform}'");
     exit(1);
   }
-  Map<String, dynamic> jsonDecoded = jsonDecode(await jsonFile.readAsString());
-  return jsonDecoded;
-}
-
-Future<String> getTodoFile(String filePath) async {
-  File todoFile = File(filePath);
-  if (!await todoFile.exists()) {
-    print("ERROR: 'todo.txt' not found");
-    exit(1);
-  }
-  String content = await todoFile.readAsString();
-  return content;
+  return openSourcePlatform;
 }
 
 void main(List<String> args) async {
   String todoFile = await Reader.getTodoFile("examples/todo.txt");
   Map<String, dynamic> configAsJson = await Reader.getConfigFile();
   Configuration configuration = Configuration.fromJson(configAsJson);
+  IOpenSourcePlatform openSourcePlatform = getOpenSourcePlatform(configuration);
 
-  TodoAsIssue todoAsIssue =
-      TodoAsIssue(todoFile: todoFile, configuration: configuration);
+  TodoAsIssue todoAsIssue = TodoAsIssue(
+    todoFile: todoFile,
+    configuration: configuration,
+    openSourcePlatform: openSourcePlatform,
+  );
+
   todoAsIssue.run();
 }

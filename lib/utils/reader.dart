@@ -13,7 +13,7 @@ class Reader {
   }
 
   static Future<Map<String, dynamic>> getConfigFile() async {
-    String path = 'todo.json';
+    String path = "todo.json";
     File jsonFile = File(path);
 
     if (!await jsonFile.exists()) {
