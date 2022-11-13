@@ -20,10 +20,11 @@ class TodoAsIssue {
   final String todoFile;
   final OpenSourcePlatform openSourcePlatform;
 
-  TodoAsIssue(
-      {required this.todoFile,
-      required this.configuration,
-      required this.openSourcePlatform});
+  TodoAsIssue({
+    required this.todoFile,
+    required this.configuration,
+    required this.openSourcePlatform,
+  });
 
   void run() async {
     lexer = Lexer(todoFile);
