@@ -19,7 +19,7 @@ class GitHub extends IOpenSourcePlatform {
   Map<String, String> getHeaders(Configuration configuration) {
     return {
       "accept": "application/vnd.github+json",
-      "Authorization": "Bearer ${configuration.token}"
+      "Authorization": "Bearer ${configuration.githubToken}"
     };
   }
 
