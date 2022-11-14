@@ -4,6 +4,11 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
+
+    2.1. [Required fields for GitHub](#required-fields-for-github)
+
+    2.2. [Required fields for GitLab](#required-fields-for-gitlab)
+
 3. [Usage](#usage)
 4. [Project architecture](#project-architecture)
 5. [Design patterns used](#design-patterns-used)
@@ -38,7 +43,22 @@ In `platform` field, you can use `github` or `gitlab`.
 
 After that, you can create a file called `todo.txt` in the project root folder to insert all your TODOs. For more informations and examples about how to create a TODO file, go [here](./examples/).
 
-`TODOasIssue` must have these informations to make things work.
+### Required fields for GitHub
+
+- `owner`: Your username
+- `repo_name_github`: Your repository
+- `platform`: It should be set to `github`
+- `github_token`: Your private access token. See [GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+Leave the remaining ones empty (empty string).
+
+### Required fields for GitHub
+
+- `repo_id_gitlab`: Your repository id
+- `platform`: It should be set to `gitlab`
+- `gitlab_token`: Your private access token. See [GitLab Docs](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+
+Leave the remaining ones empty (empty string).
 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
