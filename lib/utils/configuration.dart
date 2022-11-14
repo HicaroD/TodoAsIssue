@@ -1,13 +1,15 @@
 class Configuration {
   late String owner;
-  late String repoName;
+  late String repoNameGitHub;
+  late String repoIdGitlab;
   late String githubToken;
   late String gitlabToken;
   late String platform;
 
   Configuration({
     required this.owner,
-    required this.repoName,
+    required this.repoNameGitHub,
+    required this.repoIdGitlab,
     required this.githubToken,
     required this.gitlabToken,
     required this.platform,
@@ -15,7 +17,8 @@ class Configuration {
 
   Configuration.fromJson(Map<String, dynamic> json) {
     owner = json['owner'];
-    repoName = json['repo_name'];
+    repoNameGitHub = json['repo_name_github'];
+    repoIdGitlab = json['repo_id_gitlab'];
     githubToken = json['github_token'];
     gitlabToken = json['gitlab_token'];
     platform = json['platform'];
@@ -24,7 +27,8 @@ class Configuration {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['owner'] = owner;
-    data['repo_name'] = repoName;
+    data['repo_name_github'] = repoNameGitHub;
+    data['repo_id_gitlab'] = repoIdGitlab;
     data['github_token'] = githubToken;
     data['gitlab_token'] = gitlabToken;
     data['platform'] = platform;
