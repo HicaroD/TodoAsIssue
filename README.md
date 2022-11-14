@@ -50,12 +50,15 @@ After that, you can create a file called `todo.txt` in the project root folder t
 - `platform`: It should be set to `github`
 - `github_token`: Your private access token. See [GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
+Leave the remaining ones empty (empty string).
+
 ### Required fields for GitHub
 
 - `repo_id_gitlab`: Your repository id
 - `platform`: It should be set to `gitlab`
 - `gitlab_token`: Your private access token. See [GitLab Docs](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
 
+Leave the remaining ones empty (empty string).
 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
