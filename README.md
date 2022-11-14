@@ -4,6 +4,11 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
+
+    2.1. [Required fields for GitHub](#required-fields-for-github)
+
+    2.2. [Required fields for GitLab](#required-fields-for-gitlab)
+
 3. [Usage](#usage)
 4. [Project architecture](#project-architecture)
 5. [Design patterns used](#design-patterns-used)
@@ -14,8 +19,8 @@
 From a list of TODOs to a list of issues on your GitHub or GitLab repository.
 
 ```
-#(1)[~]: "This is my first TODO and it is completed"
-#(2)[]: "This is my second TODO and it is not completed"
+#(1)[~]: "This is my first TODO"
+#(2)[]: "This is my second TODO"
 ```
 
 GitHub and Gitlab projects can have issues created by developers / users to report errors, bugs and etcetera. The idea of building `TODOasIssue` is to automate the creation of issues locally by writing everything that you need in a simple text file and publishing it to your GitHub / GitLab project without even opening your browser to do that.
@@ -26,9 +31,11 @@ First of all, on your project root folder, create a file called `todo.json` and 
 ```json
 {
     "owner": "YOUR_GITHUB_USERNAME",
-    "repo_name": "YOUR_GITHUB_REPOSITORY_NAME",
+    "repo_name_github": "YOUR_GITHUB_REPOSITORY_NAME",
+    "repo_id_gitlab": "YOUR_GITLAB_PROJECT_ID",
     "platform": "YOUR_OPEN_SOURCE_PLATFORM",
-    "token": "YOUR_PRIVATE_TOKEN"
+    "github_token": "YOUR_PRIVATE_TOKEN_FROM_GITHUB",
+    "gitlab_token": "YOUR_PRIVATE_TOKEN_FROM_GITLAB"
 }
 ```
 
@@ -36,12 +43,27 @@ In `platform` field, you can use `github` or `gitlab`.
 
 After that, you can create a file called `todo.txt` in the project root folder to insert all your TODOs. For more informations and examples about how to create a TODO file, go [here](./examples/).
 
-`TODOasIssue` must have these informations to make things work.
+### Required fields for GitHub
+
+- `owner`: Your username
+- `repo_name_github`: Your repository
+- `platform`: It should be set to `github`
+- `github_token`: Your private access token. See [GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+
+Leave the remaining ones empty (empty string).
+
+### Required fields for GitHub
+
+- `repo_id_gitlab`: Your repository id
+- `platform`: It should be set to `gitlab`
+- `gitlab_token`: Your private access token. See [GitLab Docs](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+
+Leave the remaining ones empty (empty string).
 
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
 ## Usage
-If everything above is configured, you're allowed to run the program.
+If everything above is configured, you're allowed to run the program. If you're not understanding the usage of `[]` or `[~]`, it is just a mark for checking if the TODO was posted or not on GitHub / GitLab. If it is marked, then it is gonna be ignored by `TodoAsIssue`, it is useful to avoid duplicated issues.
 
 ## Project architecture
 -  [`lib/api`](./lib/api/): Code that is related to the API's communication.

@@ -1,11 +1,21 @@
 abstract class IHttpClient {
-  Future<HttpResponse> get(String url, {required Map<String, dynamic> headers});
-  Future<HttpResponse> post(String url,
-      {required Map<String, dynamic> headers,
-      required Map<String, dynamic> body});
-  Future<HttpResponse> put(String url,
-      {required Map<String, dynamic> body,
-      required Map<String, dynamic> headers});
+  Future<HttpResponse> get(
+    String url, {
+    required Map<String, dynamic> headers,
+    required Map<String, String> queryParameters,
+  });
+  Future<HttpResponse> post(
+    String url, {
+    required Map<String, dynamic> headers,
+    required Map<String, dynamic> body,
+    required Map<String, String> queryParameters,
+  });
+  Future<HttpResponse> put(
+    String url, {
+    required Map<String, dynamic> body,
+    required Map<String, dynamic> headers,
+    required Map<String, String> queryParameters,
+  });
 }
 
 class HttpResponse {
