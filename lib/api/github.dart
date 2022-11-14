@@ -27,8 +27,7 @@ class GitHub extends IOpenSourcePlatform {
   Future<HttpResponse> createIssue(
       Todo todo, Configuration configuration) async {
     String url =
-        "/repos/${configuration.owner}/${configuration.repoName}/issues";
-    print(url);
+        "/repos/${configuration.owner}/${configuration.repoNameGitHub}/issues";
 
     Map<String, String> headers = getHeaders(configuration);
 
@@ -36,8 +35,12 @@ class GitHub extends IOpenSourcePlatform {
       "title": todo.title,
     };
 
-    HttpResponse response =
-        await _httpClient.post(url, headers: headers, body: body);
+    HttpResponse response = await _httpClient.post(
+      url,
+      headers: headers,
+      body: body,
+      queryParameters: {},
+    );
 
     return response;
   }
