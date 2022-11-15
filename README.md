@@ -12,8 +12,9 @@
 
 4. [Usage](#usage)
 5. [Project architecture](#project-architecture)
-6. [Design patterns used](#design-patterns-used)
-7. [License](#license)
+6. [Supported platforms](#supported-platforms)
+7. [Design patterns used](#design-patterns-used)
+8. [License](#license)
 
 ## Description
 
@@ -104,6 +105,13 @@ That command will look for `todo.json` and `todo.txt` on project's root director
    -  [`lib/utils/configuration.dart`](./lib/utils/configuration.dart): Data class for representing `todo.json`.
    -  [`lib/utils/endpoints.dart`](./lib/utils/endpoints.dart): Important endpoints
    -  [`lib/utils/reader.dart`](./lib/utils/reader.dart): Helper class for reading importants files (`todo.json` and `todo.txt`)
+
+
+## Supported platforms
+
+- Linux: Working properly on Manjaro Arch Linux.
+- Windows: It might work, but it was not tested.
+- macOS: It might work, but it was not tested.
 
 ## Design patterns used
 
