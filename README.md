@@ -4,15 +4,16 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
+3. [Setting up `TodoAsIssue`](#setting-up-todoasissue)
 
-    2.1. [Required fields for GitHub](#required-fields-for-github)
+    3.1. [Required fields for GitHub](#required-fields-for-github)
 
-    2.2. [Required fields for GitLab](#required-fields-for-gitlab)
+    3.2. [Required fields for GitLab](#required-fields-for-gitlab)
 
-3. [Usage](#usage)
-4. [Project architecture](#project-architecture)
-5. [Design patterns used](#design-patterns-used)
-6. [License](#license)
+4. [Usage](#usage)
+5. [Project architecture](#project-architecture)
+6. [Design patterns used](#design-patterns-used)
+7. [License](#license)
 
 ## Description
 
@@ -26,7 +27,17 @@ From a list of TODOs to a list of issues on your GitHub or GitLab repository.
 GitHub and Gitlab projects can have issues created by developers / users to report errors, bugs and etcetera. The idea of building `TODOasIssue` is to automate the creation of issues locally by writing everything that you need in a simple text file and publishing it to your GitHub / GitLab project without even opening your browser to do that.
 
 ## Installation
-First of all, on your project root folder, create a file called `todo.json` and paste the content below:
+First of all, you need to have Dart installed on your computer. See [Dart documentation](https://dart.dev/get-dart). After that, run the following command:
+
+```bash
+dart pub global activate todo_as_issue
+```
+
+Now you have `TodoAsIssue` installed.
+
+## Setting up `TodoAsIssue`
+
+On your project root folder, create a file called `todo.json` and paste the content below:
 
 ```json
 {
@@ -63,7 +74,14 @@ Leave the remaining ones empty (empty string).
 **WARNING**: Insert this file `todo.json` on your `.gitignore` in order to keep your informations safe, especially your private token.
 
 ## Usage
-If everything above is configured, you're allowed to run the program. If you're not understanding the usage of `[]` or `[~]`, it is just a mark for checking if the TODO was posted or not on GitHub / GitLab. If it is marked, then it is gonna be ignored by `TodoAsIssue`, it is useful to avoid duplicated issues.
+
+After setting up `TodoAsIssue`, go to your project's root directory and run the following command:
+
+```
+todo_as_issue
+```
+
+That command will look for `todo.json` and `todo.txt` on project's root directory.
 
 ## Project architecture
 -  [`lib/api`](./lib/api/): Code that is related to the API's communication.

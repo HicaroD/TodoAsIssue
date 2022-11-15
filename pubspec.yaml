@@ -1,13 +1,13 @@
 name: todo_as_issue
-description: A sample command-line application.
-version: 1.0.0
-# homepage: https://www.example.com
+description: A command-line interface for converting a TODO list into a list of issues on your GitHub / GitLab repository.
+version: 1.0.1
+homepage: https://github.com/HicaroD/TodoAsIssue
+
+executables:
+  todo_as_issue: todo_as_issue
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
-
-# dependencies:
-#   path: ^1.8.0
 
 dev_dependencies:
   lints: ^2.0.0
