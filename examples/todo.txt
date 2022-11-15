@@ -1,2 +1,2 @@
-#(1)[~]: "This is my first TODO";
+#(1)[]: "This is my first TODO";
 #(2)[]: "This is my second TODO";

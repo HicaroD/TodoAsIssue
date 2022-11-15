@@ -12,13 +12,13 @@ class HttpClient implements IHttpClient {
   Future<HttpResponse> get(
     String url, {
     required Map<String, dynamic> headers,
-    required Map<String, String> queryParameters,
+    Map<String, String>? queryParameters,
   }) async {
     Uri uri = Uri(
       scheme: "https",
       host: baseUrl,
       path: url,
-      queryParameters: queryParameters,
+      queryParameters: queryParameters ?? {},
     );
     http.Response response =
         await http.get(uri, headers: headers as Map<String, String>);
@@ -30,12 +30,12 @@ class HttpClient implements IHttpClient {
   Future<HttpResponse> post(String url,
       {required Map<String, dynamic> headers,
       required Map<String, dynamic> body,
-      required Map<String, String> queryParameters}) async {
+      Map<String, String>? queryParameters}) async {
     Uri uri = Uri(
       scheme: "https",
       host: baseUrl,
       path: url,
-      queryParameters: queryParameters,
+      queryParameters: queryParameters ?? {},
     );
     http.Response response = await http.post(uri,
         body: jsonEncode(body), headers: headers as Map<String, String>);
@@ -48,13 +48,13 @@ class HttpClient implements IHttpClient {
     String url, {
     required Map<String, dynamic> headers,
     required Map<String, dynamic> body,
-    required Map<String, String> queryParameters,
+    Map<String, String>? queryParameters,
   }) async {
     Uri uri = Uri(
       scheme: "https",
       host: baseUrl,
       path: url,
-      queryParameters: queryParameters,
+      queryParameters: queryParameters ?? {},
     );
     http.Response response = await http.put(uri,
         headers: headers as Map<String, String>, body: body);
