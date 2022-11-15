@@ -39,7 +39,6 @@ class GitHub extends IOpenSourcePlatform {
       url,
       headers: headers,
       body: body,
-      queryParameters: {},
     );
 
     return response;
