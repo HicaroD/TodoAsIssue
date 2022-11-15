@@ -1,6 +1,6 @@
 name: todo_as_issue
 description: A command-line interface for converting a TODO list into a list of issues on your GitHub / GitLab repository.
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/HicaroD/TodoAsIssue
 
 executables:
