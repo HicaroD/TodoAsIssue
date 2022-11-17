@@ -27,7 +27,7 @@ class API {
           print(response.body);
           exit(1);
         }
-        print("🎉 Issue was created successfully 🎉");
+        print("🎉 Issue ${todo.id} was created successfully 🎉");
         // This is useful for avoiding problems with GitHub's rate limit policies
         sleep(Duration(seconds: 2));
       }
