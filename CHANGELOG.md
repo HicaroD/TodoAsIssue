@@ -13,3 +13,7 @@
 ## 1.1.1
 
 - Bug fixes: Problems with path for finding `todo.txt`
+
+## 1.1.2
+
+- Refactor: Lexer and parser loops
