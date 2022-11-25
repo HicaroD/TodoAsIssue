@@ -14,7 +14,8 @@
 5. [Project architecture](#project-architecture)
 6. [Supported platforms](#supported-platforms)
 7. [Design patterns used](#design-patterns-used)
-8. [License](#license)
+8. [UML diagram](#uml-diagram)
+9. [License](#license)
 
 ## Description
 
@@ -112,6 +113,9 @@ That command will look for `todo.json` and `todo.txt` on project's root director
 - Linux: Working properly on Manjaro Arch Linux.
 - Windows: It might work, but it was not tested.
 - macOS: It might work, but it was not tested.
+
+## UML Diagram
+My UML diagram is very big, therefore I'll just link to the file instead of trying to put it here. Check it [here](diagram.puml).
 
 ## Design patterns used
 
