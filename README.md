@@ -121,11 +121,11 @@ My UML diagram is very big, therefore I'll just link to the file instead of tryi
 
 - [Iterator](https://refactoring.guru/design-patterns/iterator)
 
-    Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. Additionally, even though Dart provides a built-in iterator for `List`, Dart doesn't offer me a method called `hasNext()` to check if there is a next element to iterate, that's why I implemented this pattern, just for building this method by myself. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/fef632e69eddb22b94ad1270d8bff52b943fe969/lib/parser/parser.dart#L4).
+    Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. Additionally, even though Dart provides a built-in iterator for `List`, Dart doesn't offer me a method called `hasNext()` to check if there is a next element to iterate, that's why I implemented this pattern, just for building this method by myself. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/master/lib/parser/parser.dart).
 
 - [Singleton](https://refactoring.guru/design-patterns/singleton)
 
-    Singleton pattern was used on the implementation of open source platforms, such as GitHub and GitLab. I decided to use it because I didn't want to have more than one instance of each platform on my program, it should be unique, makes no sense to have more than one of these. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/63b0ba0bfb07eb3eb1a8394c0e8cd038981c9915/lib/api/github.dart#L1) and [here](https://github.com/HicaroD/TodoAsIssue/blob/aa5793998675dff1a9ab2f76de3082f69c36d8b9/lib/api/gitlab.dart#L1).
+    Singleton pattern was used on the implementation of open source platforms, such as GitHub and GitLab. I decided to use it because I didn't want to have more than one instance of each platform on my program, it should be unique, makes no sense to have more than one of these. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/master/lib/api/github.dart) and [here](https://github.com/HicaroD/TodoAsIssue/blob/master/lib/api/gitlab.dart).
 
 - [Strategy](https://refactoring.guru/design-patterns/strategy)
  
@@ -133,7 +133,7 @@ My UML diagram is very big, therefore I'll just link to the file instead of tryi
 
 - [Facade](https://refactoring.guru/design-patterns/facade)
 
-    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade". You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/5158fd87eab23af42102752c7a57667ddb02c498/bin/todo_as_issue.dart#L12).
+    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade". You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/master/bin/todo_as_issue.dart).
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
