@@ -22,8 +22,8 @@
 From a list of TODOs to a list of issues on your GitHub or GitLab repository.
 
 ```
-#(1)[~]: "This is my first TODO"
-#(2)[]: "This is my second TODO"
+#(1)[~]: "This is my first TODO";
+#(2)[]: "This is my second TODO";
 ```
 
 GitHub and Gitlab projects can have issues created by developers / users to report errors, bugs and etcetera. The idea of building `TODOasIssue` is to automate the creation of issues locally by writing everything that you need in a simple text file and publishing it to your GitHub / GitLab project without even opening your browser to do that.
@@ -134,6 +134,14 @@ My UML diagram is very big, therefore I'll just link to the file instead of tryi
 - [Facade](https://refactoring.guru/design-patterns/facade)
 
     Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade". You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/master/bin/todo_as_issue.dart).
+
+## Possible bugs and how to avoid it
+
+1. The program can crash if it has a new line at the end of `todo.txt`. Make sure you don't have a new line at the end.
+
+2. The program can crash if it has extra whitespaces at the end of each TODO in `todo.txt`. Make you sure you don't have these extra whitespaces. 
+
+**I'm working to solve these issues.**
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
