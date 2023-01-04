@@ -17,3 +17,8 @@
 ## 1.1.2
 
 - Refactor: Lexer and parser loops
+
+## 1.2.0
+
+- Refactor: Making `todo.txt` design more concise
+- Tests: Unit tests for lexer and parser
