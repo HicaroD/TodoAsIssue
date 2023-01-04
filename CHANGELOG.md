@@ -22,3 +22,7 @@
 
 - Refactor: Making `todo.txt` design more concise
 - Tests: Unit tests for lexer and parser
+
+## 1.2.1
+
+- Docs: Fix documentation
