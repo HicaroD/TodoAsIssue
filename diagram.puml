@@ -1,0 +1,160 @@
+@startuml
+set namespaceSeparator ::
+
+class "todo_as_issue::parser::todo.dart::Todo" {
+  +int id
+  +bool wasPosted
+  +String title
+  +String toString()
+}
+
+class "todo_as_issue::parser::error_reporter.dart::ErrorReporter" {
+  +void reportError()
+}
+
+class "todo_as_issue::parser::parser.dart::TokenIterator" {
+  +List<Token> tokens
+  +int cursor
+  +dynamic current
+  +bool moveNext()
+  +bool hasNext()
+}
+
+"dart::core::Iterator" <|-- "todo_as_issue::parser::parser.dart::TokenIterator"
+
+class "todo_as_issue::parser::parser.dart::Parser" {
+  +List<Token> tokens
+  +ErrorReporter errorReporter
+  +List<Todo> parse()
+}
+
+"todo_as_issue::parser::parser.dart::Parser" o-- "todo_as_issue::parser::error_reporter.dart::ErrorReporter"
+
+class "todo_as_issue::todo_as_issue.dart::TodoAsIssue" {
+  +Lexer lexer
+  +Parser parser
+  +API api
+  +Configuration configuration
+  +String todoFile
+  +IOpenSourcePlatform openSourcePlatform
+  +void run()
+}
+
+"todo_as_issue::todo_as_issue.dart::TodoAsIssue" o-- "todo_as_issue::lexer::lexer.dart::Lexer"
+"todo_as_issue::todo_as_issue.dart::TodoAsIssue" o-- "todo_as_issue::parser::parser.dart::Parser"
+"todo_as_issue::todo_as_issue.dart::TodoAsIssue" o-- "todo_as_issue::api::api.dart::API"
+"todo_as_issue::todo_as_issue.dart::TodoAsIssue" o-- "todo_as_issue::utils::configuration.dart::Configuration"
+"todo_as_issue::todo_as_issue.dart::TodoAsIssue" o-- "todo_as_issue::api::opensource_platform.dart::IOpenSourcePlatform"
+
+abstract class "todo_as_issue::core::http_client::http_client_interface.dart::IHttpClient" {
+  +Future<HttpResponse> get()
+  +Future<HttpResponse> post()
+  +Future<HttpResponse> put()
+}
+
+class "todo_as_issue::core::http_client::http_client_interface.dart::HttpResponse" {
+  +Map<String, dynamic> body
+  +int statusCode
+}
+
+class "todo_as_issue::core::http_client::http_client.dart::HttpClient" {
+  +Client client
+  +String baseUrl
+  +Future<HttpResponse> get()
+  +Future<HttpResponse> post()
+  +Future<HttpResponse> put()
+}
+
+"todo_as_issue::core::http_client::http_client.dart::HttpClient" o-- "http::src::client.dart::Client"
+"todo_as_issue::core::http_client::http_client_interface.dart::IHttpClient" <|-- "todo_as_issue::core::http_client::http_client.dart::HttpClient"
+
+class "todo_as_issue::utils::configuration.dart::Configuration" {
+  +String owner
+  +String repoNameGitHub
+  +String repoIdGitlab
+  +String githubToken
+  +String gitlabToken
+  +String platform
+  +Map<String, dynamic> toJson()
+}
+
+class "todo_as_issue::utils::reader.dart::Reader" {
+  {static} +Future<String> getTodoFile()
+  {static} +Future<Map<String, dynamic>> getConfigFile()
+}
+
+class "todo_as_issue::api::gitlab.dart::GitLab" {
+  {static} -GitLab _singleton
+  -HttpClient _httpClient
+  +Map<String, String> getHeaders()
+  +Future<HttpResponse> createIssue()
+}
+
+"todo_as_issue::api::gitlab.dart::GitLab" o-- "todo_as_issue::api::gitlab.dart::GitLab"
+"todo_as_issue::api::gitlab.dart::GitLab" o-- "todo_as_issue::core::http_client::http_client.dart::HttpClient"
+"todo_as_issue::api::opensource_platform.dart::IOpenSourcePlatform" <|-- "todo_as_issue::api::gitlab.dart::GitLab"
+
+class "todo_as_issue::api::api.dart::API" {
+  -IOpenSourcePlatform _openSourcePlatform
+  +IOpenSourcePlatform openSourcePlatform
+  +void createIssues()
+}
+
+"todo_as_issue::api::api.dart::API" o-- "todo_as_issue::api::opensource_platform.dart::IOpenSourcePlatform"
+
+class "todo_as_issue::api::github.dart::GitHub" {
+  {static} -GitHub _singleton
+  -HttpClient _httpClient
+  +Map<String, String> getHeaders()
+  +Future<HttpResponse> createIssue()
+}
+
+"todo_as_issue::api::github.dart::GitHub" o-- "todo_as_issue::api::github.dart::GitHub"
+"todo_as_issue::api::github.dart::GitHub" o-- "todo_as_issue::core::http_client::http_client.dart::HttpClient"
+"todo_as_issue::api::opensource_platform.dart::IOpenSourcePlatform" <|-- "todo_as_issue::api::github.dart::GitHub"
+
+abstract class "todo_as_issue::api::opensource_platform.dart::IOpenSourcePlatform" {
+  +Future<HttpResponse> createIssue()
+}
+
+class "todo_as_issue::lexer::tokens.dart::Token" {
+  +TokenKind kind
+  +String lexeme
+  +String toString()
+}
+
+"todo_as_issue::lexer::tokens.dart::Token" o-- "todo_as_issue::lexer::tokens.dart::TokenKind"
+
+class "todo_as_issue::lexer::tokens.dart::TokenKind" {
+  +int index
+  {static} +List<TokenKind> values
+  {static} +TokenKind openingSquareBracket
+  {static} +TokenKind closingSquareBracket
+  {static} +TokenKind hashSymbol
+  {static} +TokenKind openingParenthesis
+  {static} +TokenKind closingParenthesis
+  {static} +TokenKind colon
+  {static} +TokenKind quote
+  {static} +TokenKind issueName
+  {static} +TokenKind tilde
+  {static} +TokenKind number
+  {static} +TokenKind semicolon
+}
+
+"todo_as_issue::lexer::tokens.dart::TokenKind" o-- "todo_as_issue::lexer::tokens.dart::TokenKind"
+"dart::core::Enum" <|-- "todo_as_issue::lexer::tokens.dart::TokenKind"
+
+class "todo_as_issue::lexer::lexer.dart::Lexer" {
+  +String fileContent
+  +int cursor
+  +bool isEndOfFile
+  +String currentCharacter
+  +List<Token> tokenize()
+  +Token consumeToken()
+  +bool isDigit()
+  +void skipWhitespaces()
+  +void advanceCursor()
+}
+
+
+@enduml

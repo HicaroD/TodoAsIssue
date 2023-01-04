@@ -37,28 +37,6 @@ class Parser {
     TokenIterator iterator = TokenIterator(tokens);
 
     while (iterator.hasNext()) {
-      // TODO: try to refactor this while-loop
-      if (iterator.current.kind != TokenKind.hashSymbol) {
-        errorReporter.reportError(iterator.current);
-      }
-      iterator.moveNext();
-
-      if (iterator.current.kind != TokenKind.openingParenthesis) {
-        errorReporter.reportError(iterator.current);
-      }
-      iterator.moveNext();
-
-      if (iterator.current.kind != TokenKind.number) {
-        errorReporter.reportError(iterator.current);
-      }
-      int todoId = int.parse(iterator.current.lexeme);
-      iterator.moveNext();
-
-      if (iterator.current.kind != TokenKind.closingParenthesis) {
-        errorReporter.reportError(iterator.current);
-      }
-      iterator.moveNext();
-
       if (iterator.current.kind != TokenKind.openingSquareBracket) {
         errorReporter.reportError(iterator.current);
       }
@@ -92,7 +70,7 @@ class Parser {
 
       if (iterator.hasNext()) iterator.moveNext();
 
-      Todo todo = Todo(id: todoId, wasPosted: wasPosted, title: issueTitle);
+      Todo todo = Todo(wasPosted: wasPosted, title: issueTitle);
       todos.add(todo);
     }
     return todos;

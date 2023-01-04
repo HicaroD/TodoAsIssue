@@ -1,29 +1,20 @@
 import 'dart:io';
 
+import 'package:todo_as_issue/lexer/position.dart';
+
 import 'tokens.dart';
 
 class Lexer {
-  final String fileContent;
-  int cursor = 0;
+  String fileContent;
+  Cursor cursor = Cursor();
   bool isEndOfFile = false;
   late String currentCharacter;
 
   Lexer(this.fileContent);
 
-  void skipWhitespaces() {
-    if (currentCharacter.trim().isEmpty) advanceCursor();
-  }
-
-  void advanceCursor() {
-    if (cursor < fileContent.length - 1) {
-      currentCharacter = fileContent[cursor];
-      cursor++;
-    } else {
-      isEndOfFile = true;
-    }
-  }
-
   List<Token> tokenize() {
+    fileContent = fileContent.trim();
+
     List<Token> tokens = [];
     advanceCursor();
 
@@ -33,42 +24,20 @@ class Lexer {
       switch (currentCharacter) {
         case "[":
           {
-            tokens.add(Token(TokenKind.openingSquareBracket, currentCharacter));
-            advanceCursor();
+            tokens.add(
+                consumeToken(TokenKind.openingSquareBracket, currentCharacter));
             break;
           }
         case "]":
           {
-            tokens.add(Token(TokenKind.closingSquareBracket, currentCharacter));
-            advanceCursor();
-            break;
-          }
-
-        case "#":
-          {
-            tokens.add(Token(TokenKind.hashSymbol, currentCharacter));
-            advanceCursor();
-            break;
-          }
-
-        case "(":
-          {
-            tokens.add(Token(TokenKind.openingParenthesis, currentCharacter));
-            advanceCursor();
-            break;
-          }
-
-        case ")":
-          {
-            tokens.add(Token(TokenKind.closingParenthesis, currentCharacter));
-            advanceCursor();
+            tokens.add(
+                consumeToken(TokenKind.closingSquareBracket, currentCharacter));
             break;
           }
 
         case ":":
           {
-            tokens.add(Token(TokenKind.colon, currentCharacter));
-            advanceCursor();
+            tokens.add(consumeToken(TokenKind.colon, currentCharacter));
             break;
           }
 
@@ -87,38 +56,55 @@ class Lexer {
 
         case "~":
           {
-            tokens.add(Token(TokenKind.tilde, currentCharacter));
-            advanceCursor();
+            tokens.add(consumeToken(TokenKind.tilde, currentCharacter));
             break;
           }
 
         case ";":
           {
-            tokens.add(Token(TokenKind.semicolon, currentCharacter));
-            advanceCursor();
+            tokens.add(consumeToken(TokenKind.semicolon, currentCharacter));
             break;
           }
 
+        case "\n":
+        case "\t":
+          break;
+
         default:
           {
-            if (isDigit(currentCharacter)) {
-              String number = "";
-              while (isDigit(currentCharacter)) {
-                number += currentCharacter;
-                advanceCursor();
-              }
-              tokens.add(Token(TokenKind.number, number));
-            } else {
-              print("ERROR: Unknown token: $currentCharacter");
-              exit(1);
-            }
+            print(
+                "ERROR: Unknown token: '$currentCharacter' at line ${cursor.line}");
+            exit(1);
           }
       }
     }
     return tokens;
   }
 
+  Token consumeToken(TokenKind kind, String lexeme) {
+    Token token = Token(kind, lexeme);
+    advanceCursor();
+    return token;
+  }
+
   bool isDigit(String currentChar) {
     return double.tryParse(currentChar) != null;
+  }
+
+  void skipWhitespaces() {
+    if (currentCharacter.trim().isEmpty) advanceCursor();
+  }
+
+  void advanceCursor() {
+    if (cursor.position < fileContent.length) {
+      currentCharacter = fileContent[cursor.position];
+    } else {
+      isEndOfFile = true;
+    }
+
+    if (currentCharacter == '\n') {
+      cursor.line++;
+    }
+    cursor.position++;
   }
 }
