@@ -22,8 +22,8 @@
 From a list of TODOs to a list of issues on your GitHub or GitLab repository.
 
 ```
-#(1)[~]: "This is my first TODO";
-#(2)[]: "This is my second TODO";
+[~]: "This is my first TODO";
+[]: "This is my second TODO";
 ```
 
 GitHub and Gitlab projects can have issues created by developers / users to report errors, bugs and etcetera. The idea of building `TODOasIssue` is to automate the creation of issues locally by writing everything that you need in a simple text file and publishing it to your GitHub / GitLab project without even opening your browser to do that.
@@ -97,6 +97,7 @@ That command will look for `todo.json` and `todo.txt` on project's root director
      - [`lib/core/http_client/http_client.dart`](./lib/core/http_client/http_client.dart): Implementation of an HTTP Client using [`http`](https://pub.dev/packages/http) package.
 -  [`lib/lexer`](./lib/lexer/): Tool for converting a text file into a list of tokens
    -  [`lib/lexer/lexer.dart`](./lib/lexer/lexer.dart): Implementation of lexer (tokenizer)
+   -  [`lib/lexer/position.dart`](./lib/lexer/position.dart): Class for managing cursor and line positions
    -  [`lib/lexer/tokens.dart`](./lib/lexer/tokens.dart): Class for representing a token and an enum to represent a token kind.
 -  [`lib/parser`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
    - [`lib/parser/error_reporter.dart`](./lib/parser/error_reporter.dart): Class for simply reporting a parsing error (every time a todo file is not formatted, this class should throw an error and close the program).
@@ -106,7 +107,9 @@ That command will look for `todo.json` and `todo.txt` on project's root director
    -  [`lib/utils/configuration.dart`](./lib/utils/configuration.dart): Data class for representing `todo.json`.
    -  [`lib/utils/endpoints.dart`](./lib/utils/endpoints.dart): Important endpoints
    -  [`lib/utils/reader.dart`](./lib/utils/reader.dart): Helper class for reading importants files (`todo.json` and `todo.txt`)
-
+-  [`test`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
+   - [`test/lexer_test.dart`](./test/lexer_test.dart): Unit test for lexer
+   - [`test/parser_test.dart`](./test/parser_test.dart): Unit test for parser
 
 ## Supported platforms
 
