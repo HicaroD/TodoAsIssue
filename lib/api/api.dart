@@ -16,6 +16,8 @@ class API {
   }
 
   void createIssues(List<Todo> todos, Configuration configuration) async {
+    int issueCounter = 0;
+
     for (Todo todo in todos) {
       if (!todo.wasPosted) {
         HttpResponse response =
@@ -27,10 +29,17 @@ class API {
           print(response.body);
           exit(1);
         }
-        print("🎉 Issue ${todo.id} was created successfully 🎉");
+        issueCounter++;
         // This is useful for avoiding problems with GitHub's rate limit policies
         sleep(Duration(seconds: 2));
       }
+    }
+    if (issueCounter == 0) {
+      print("No issues were created");
+    } else if (issueCounter == 1) {
+      print("🎉 $issueCounter issue was created successfully 🎉");
+    } else {
+      print("🎉 $issueCounter issues were created successfully 🎉");
     }
   }
 }

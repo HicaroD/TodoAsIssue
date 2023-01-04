@@ -1,9 +1,6 @@
 enum TokenKind {
   openingSquareBracket,
   closingSquareBracket,
-  hashSymbol,
-  openingParenthesis,
-  closingParenthesis,
   colon,
   quote,
   issueName,
