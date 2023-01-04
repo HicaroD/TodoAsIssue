@@ -73,7 +73,7 @@ class Lexer {
         default:
           {
             print(
-                "ERROR: Unknown token: '${currentCharacter}' at line ${cursor.line}");
+                "ERROR: Unknown token: '$currentCharacter' at line ${cursor.line}");
             exit(1);
           }
       }
