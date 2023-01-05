@@ -107,7 +107,7 @@ That command will look for `todo.json` and `todo.txt` on project's root director
    -  [`lib/utils/configuration.dart`](./lib/utils/configuration.dart): Data class for representing `todo.json`.
    -  [`lib/utils/endpoints.dart`](./lib/utils/endpoints.dart): Important endpoints
    -  [`lib/utils/reader.dart`](./lib/utils/reader.dart): Helper class for reading importants files (`todo.json` and `todo.txt`)
--  [`test`](./lib/parser/): Tool for converting a list of tokens into a list of TODOs
+-  [`test`](./test/): Folder for storing all tests
    - [`test/lexer_test.dart`](./test/lexer_test.dart): Unit test for lexer
    - [`test/parser_test.dart`](./test/parser_test.dart): Unit test for parser
 
