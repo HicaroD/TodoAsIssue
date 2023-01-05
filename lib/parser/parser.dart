@@ -58,11 +58,17 @@ class Parser {
       }
       iterator.moveNext();
 
-      if (iterator.current.kind != TokenKind.issueName) {
+      if (iterator.current.kind != TokenKind.issueText) {
         errorReporter.reportError(iterator.current);
       }
       String issueTitle = iterator.current.lexeme;
       iterator.moveNext();
+
+      String issueBodyText = "";
+      if (iterator.current.kind == TokenKind.issueText) {
+        issueBodyText = iterator.current.lexeme;
+        iterator.moveNext();
+      }
 
       if (iterator.current.kind != TokenKind.semicolon) {
         errorReporter.reportError(iterator.current);
@@ -70,7 +76,8 @@ class Parser {
 
       if (iterator.hasNext()) iterator.moveNext();
 
-      Todo todo = Todo(wasPosted: wasPosted, title: issueTitle);
+      final todo =
+          Todo(wasPosted: wasPosted, title: issueTitle, body: issueBodyText);
       todos.add(todo);
     }
     return todos;
