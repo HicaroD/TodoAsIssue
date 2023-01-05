@@ -11,7 +11,23 @@ void main() {
       TokenKind.openingSquareBracket,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test("test single valid incompleted todo with body text", () {
+    final input = '[]: "This is my first TODO" "Some body text";';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
       TokenKind.semicolon,
     ];
 
@@ -27,7 +43,43 @@ void main() {
       TokenKind.tilde,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test("test single valid completed todo with body text", () {
+    final input = '[~]: "This is my first TODO" "Some body text";';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test(
+      "test single valid completed todo with body text separated by new lines and whitespaces",
+      () {
+    final input = '[~]: "This is my first TODO"\t\n\n\t"Some body text";';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
       TokenKind.semicolon,
     ];
 
@@ -43,19 +95,53 @@ void main() {
       TokenKind.openingSquareBracket,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
       TokenKind.semicolon,
       TokenKind.openingSquareBracket,
       TokenKind.tilde,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
       TokenKind.semicolon,
       TokenKind.openingSquareBracket,
       TokenKind.tilde,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+    assertTokens(result, expected);
+  });
+
+  test("test multiple todos with body text with new lines and whitespaces", () {
+    final input = r'''[]: "This is my first TODO" "my first body text";
+                      [~]: "This is my second TODO" 
+                                            "my second body text"; 
+                      [~]: "This is my last TODO"
+                      "My last body text";
+                      ''';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
       TokenKind.semicolon,
     ];
     assertTokens(result, expected);
