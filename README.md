@@ -52,6 +52,10 @@ On your project root folder, create a file called `todo.json` and paste the cont
 
 In `platform` field, you can use `github` or `gitlab`.
 
+See the image below from my URL bar that will teach you how to identify your `owner` and `repo_name_github` fields:
+
+![image](https://user-images.githubusercontent.com/75737377/210892430-78b320ec-bd78-451a-9b9f-ee0c7684e1f9.png)
+
 After that, you can create a file called `todo.txt` in the project root folder to insert all your TODOs. For more informations and examples about how to create a TODO file, go [here](./examples/).
 
 ### Required fields for GitHub
