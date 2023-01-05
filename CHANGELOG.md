@@ -26,3 +26,8 @@
 ## 1.2.1
 
 - Docs: Fix documentation
+
+## 1.2.2
+
+- Docs: Fix documentation (link to `test` folder was incorrect)
+- Refactor: Improving error messages for different status codes
