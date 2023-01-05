@@ -27,6 +27,7 @@ class GitLab extends IOpenSourcePlatform {
     Map<String, String> headers = getHeaders(configuration);
     Map<String, String> queryParameters = {
       "title": todo.title,
+      "description": todo.body,
     };
     String url = "api/v4/projects/${configuration.repoIdGitlab}/issues";
     HttpResponse response = await _httpClient.post(
