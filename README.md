@@ -13,8 +13,6 @@
 4. [Usage](#usage)
 5. [Project architecture](#project-architecture)
 6. [Supported platforms](#supported-platforms)
-7. [Design patterns used](#design-patterns-used)
-8. [UML diagram](#uml-diagram)
 9. [License](#license)
 
 ## Description
@@ -53,6 +51,10 @@ On your project root folder, create a file called `todo.json` and paste the cont
 ```
 
 In `platform` field, you can use `github` or `gitlab`.
+
+See the image below from my URL bar that will teach you how to identify your `owner` and `repo_name_github` fields:
+
+![image](https://user-images.githubusercontent.com/75737377/210892430-78b320ec-bd78-451a-9b9f-ee0c7684e1f9.png)
 
 After that, you can create a file called `todo.txt` in the project root folder to insert all your TODOs. For more informations and examples about how to create a TODO file, go [here](./examples/).
 
@@ -113,38 +115,9 @@ That command will look for `todo.json` and `todo.txt` on project's root director
 
 ## Supported platforms
 
-- Linux: Working properly on Manjaro Arch Linux.
+- Linux: Working properly on Manjaro Arch Linux and Ubuntu.
 - Windows: It might work, but it was not tested.
 - macOS: It might work, but it was not tested.
-
-## UML Diagram
-My UML diagram is very big, therefore I'll just link to the file instead of trying to put it here. Check it [here](diagram.puml).
-
-## Design patterns used
-
-- [Iterator](https://refactoring.guru/design-patterns/iterator)
-
-    Iterator pattern was used on the parser implementation. I used it for iterating over a list of tokens. Additionally, even though Dart provides a built-in iterator for `List`, Dart doesn't offer me a method called `hasNext()` to check if there is a next element to iterate, that's why I implemented this pattern, just for building this method by myself. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/master/lib/parser/parser.dart).
-
-- [Singleton](https://refactoring.guru/design-patterns/singleton)
-
-    Singleton pattern was used on the implementation of open source platforms, such as GitHub and GitLab. I decided to use it because I didn't want to have more than one instance of each platform on my program, it should be unique, makes no sense to have more than one of these. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/master/lib/api/github.dart) and [here](https://github.com/HicaroD/TodoAsIssue/blob/master/lib/api/gitlab.dart).
-
-- [Strategy](https://refactoring.guru/design-patterns/strategy)
- 
-    Strategy pattern was used on the implementation of open source platforms as well. I decided to do this because we can have more than one kind of open source platforms, such as GitHub and GitLab. Therefore we can change the "strategy" to another open source platform. You can check it out [here](https://github.com/HicaroD/TodoAsIssue/tree/feature/api_communication/lib/api).
-
-- [Facade](https://refactoring.guru/design-patterns/facade)
-
-    Facade pattern was used on the implementation of `TodoAsIssue` class. This class is used for calling all the important methods, just acting like an front-facing interface masking more complex underlying code. It happens because `TodoAsIssue` doesn't know anything about the inner implementations of lexer and parser, for example, that's why it is called "Facade". You can check it out [here](https://github.com/HicaroD/TodoAsIssue/blob/master/bin/todo_as_issue.dart).
-
-## Possible bugs and how to avoid it
-
-1. The program can crash if it has a new line at the end of `todo.txt`. Make sure you don't have a new line at the end.
-
-2. The program can crash if it has extra whitespaces at the end of each TODO in `todo.txt`. Make you sure you don't have these extra whitespaces. 
-
-**I'm working to solve these issues.**
 
 ## License
 This project is licensed under the MIT license. See [LICENSE](LICENSE).
