@@ -23,21 +23,44 @@ class API {
         HttpResponse response =
             await _openSourcePlatform.createIssue(todo, configuration);
 
-        if (response.statusCode != 201) {
-          print("Error: Can't create issue");
-          print(response.statusCode);
-          print(response.body);
-          exit(1);
-        }
+        if (response.statusCode != 201) handleErrorStatusCode(response);
+
         issueCounter++;
-        // This is useful for avoiding problems with GitHub's rate limit policies
         sleep(Duration(seconds: 2));
       }
     }
-    if (issueCounter == 0) {
-      print("No issues were created");
-    } else if (issueCounter == 1) {
-      print("🎉 $issueCounter issue was created successfully 🎉");
+    showSuccessfulMessage(issueCounter);
+  }
+
+  void handleErrorStatusCode(HttpResponse response) {
+    // TODO: refactor
+    switch (response.statusCode) {
+      case 401:
+      case 404:
+        {
+          print(
+              "Error: Check if your token and other credentials from 'todo.json' are correct and valid");
+        }
+        break;
+
+      case 503:
+        {
+          print("Error: Service unavaiable. Try again later.");
+        }
+        break;
+
+      case 422:
+        {
+          print("Error: this command has been spammed. Try again later.");
+        }
+        break;
+    }
+    exit(1);
+  }
+
+  void showSuccessfulMessage(int issueCounter) {
+    if (issueCounter == 1) {
+      print("🎉 A issue was created successfully 🎉");
     } else {
       print("🎉 $issueCounter issues were created successfully 🎉");
     }
