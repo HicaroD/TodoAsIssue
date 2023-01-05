@@ -50,7 +50,7 @@ class Lexer {
               advanceCursor();
             }
             advanceCursor();
-            tokens.add(Token(TokenKind.issueName, issueName));
+            tokens.add(Token(TokenKind.issueText, issueName));
             break;
           }
 

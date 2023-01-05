@@ -3,7 +3,7 @@ enum TokenKind {
   closingSquareBracket,
   colon,
   quote,
-  issueName,
+  issueText,
   tilde,
   number,
   semicolon,
