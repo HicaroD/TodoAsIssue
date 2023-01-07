@@ -22,6 +22,7 @@ From a list of TODOs to a list of issues on your GitHub or GitLab repository.
 ```
 [~]: "This is my first TODO";
 []: "This is my second TODO";
+[]: "This is my last TODO" "And it also has a body text";
 ```
 
 GitHub and Gitlab projects can have issues created by developers / users to report errors, bugs and etcetera. The idea of building `TODOasIssue` is to automate the creation of issues locally by writing everything that you need in a simple text file and publishing it to your GitHub / GitLab project without even opening your browser to do that.

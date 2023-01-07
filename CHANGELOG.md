@@ -31,3 +31,10 @@
 
 - Docs: Fix documentation (link to `test` folder was incorrect)
 - Refactor: Improving error messages for different status codes
+
+## 1.3.0
+
+- Refactor: Refactoring error handling
+- Test: Writing tests for lexer, parser and API
+- Feature: Issues can also have an optional body text
+- Docs: Improving documentation with examples
