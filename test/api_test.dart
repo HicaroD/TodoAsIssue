@@ -2,12 +2,10 @@ import 'package:test/test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:todo_as_issue/api/api.dart';
 import 'package:todo_as_issue/api/github.dart';
-import 'package:todo_as_issue/api/gitlab.dart';
 import 'package:todo_as_issue/api/successful_status.dart';
 import 'package:todo_as_issue/core/errors/api_exceptions.dart';
 import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
-import 'package:todo_as_issue/utils/configuration.dart';
 
 import 'mocks/configuration_mock.dart';
 import 'mocks/todo_mocks.dart';
