@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:todo_as_issue/core/errors/lexer_exceptions.dart';
 import 'package:todo_as_issue/lexer/position.dart';
 
 import 'tokens.dart';
@@ -66,16 +67,8 @@ class Lexer {
             break;
           }
 
-        case "\n":
-        case "\t":
-          break;
-
         default:
-          {
-            print(
-                "ERROR: Unknown token: '$currentCharacter' at line ${cursor.line}");
-            exit(1);
-          }
+          throw UnknownToken(currentCharacter);
       }
     }
     return tokens;
@@ -92,7 +85,9 @@ class Lexer {
   }
 
   void skipWhitespaces() {
-    if (currentCharacter.trim().isEmpty) advanceCursor();
+    while (currentCharacter.trim().isEmpty) {
+      advanceCursor();
+    }
   }
 
   void advanceCursor() {
