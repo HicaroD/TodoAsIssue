@@ -33,6 +33,7 @@ class GitHub extends IOpenSourcePlatform {
 
     Map<String, String> body = {
       "title": todo.title,
+      "body": todo.body,
     };
 
     HttpResponse response = await _httpClient.post(
