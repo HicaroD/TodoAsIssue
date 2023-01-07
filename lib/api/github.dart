@@ -1,5 +1,4 @@
 import 'package:todo_as_issue/api/opensource_platform.dart';
-import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/parser/todo.dart';
 import 'package:todo_as_issue/utils/configuration.dart';
 import 'package:todo_as_issue/utils/endpoints.dart';
@@ -7,14 +6,9 @@ import 'package:todo_as_issue/utils/endpoints.dart';
 import '../core/http_client/http_client_interface.dart';
 
 class GitHub extends IOpenSourcePlatform {
-  GitHub._internal();
-  static final GitHub _singleton = GitHub._internal();
+  final IHttpClient httpClient;
 
-  factory GitHub() {
-    return _singleton;
-  }
-
-  final HttpClient _httpClient = HttpClient(baseUrl: GITHUB_BASE_URL);
+  GitHub(this.httpClient);
 
   Map<String, String> getHeaders(Configuration configuration) {
     return {
@@ -33,9 +27,10 @@ class GitHub extends IOpenSourcePlatform {
 
     Map<String, String> body = {
       "title": todo.title,
+      "body": todo.body,
     };
 
-    HttpResponse response = await _httpClient.post(
+    HttpResponse response = await httpClient.post(
       url,
       headers: headers,
       body: body,

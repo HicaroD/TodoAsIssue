@@ -3,22 +3,39 @@ import 'package:todo_as_issue/lexer/lexer.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
 
 void main() {
-  test("test single valid incompleted todo", () {
+  test("should be a valid incompleted TODO without body text", () {
     final input = '[]: "This is my first TODO";';
     final lexer = Lexer(input);
     final result = lexer.tokenize();
+
     final expected = [
       TokenKind.openingSquareBracket,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
       TokenKind.semicolon,
     ];
 
     assertTokens(result, expected);
   });
 
-  test("test single valid completed todo", () {
+  test("should be a valid incompleted TODO with body text", () {
+    final input = '[]: "This is my first TODO" "Some body text";';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test("should be a valid completed TODO with empty body text", () {
     final input = '[~]: "This is my first TODO";';
     final lexer = Lexer(input);
     final result = lexer.tokenize();
@@ -27,14 +44,51 @@ void main() {
       TokenKind.tilde,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
       TokenKind.semicolon,
     ];
 
     assertTokens(result, expected);
   });
 
-  test("test multiple todos with new lines and spaces", () {
+  test("should a single valid completed TODO with body text", () {
+    final input = '[~]: "This is my first TODO" "Some body text";';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test("should be two valid TODOs even separated by new lines and whitespaces",
+      () {
+    final input = '[~]: "This is my first TODO"\t\n\n\t"Some body text";';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test(
+      "should be a valid list of TODOS with empty body text even with new lines and whitespaces",
+      () {
     final input =
         '\t[]:\t"This is my first TODO";\n[~]: "This is my second TODO";\t[~]:\t"This is my last TODO";\n';
     final lexer = Lexer(input);
@@ -43,19 +97,55 @@ void main() {
       TokenKind.openingSquareBracket,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
       TokenKind.semicolon,
       TokenKind.openingSquareBracket,
       TokenKind.tilde,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
       TokenKind.semicolon,
       TokenKind.openingSquareBracket,
       TokenKind.tilde,
       TokenKind.closingSquareBracket,
       TokenKind.colon,
-      TokenKind.issueName,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+    ];
+    assertTokens(result, expected);
+  });
+
+  test(
+      "should be a valid list of TODOs with body text even with a lot of whitespaces and new lines",
+      () {
+    final input = r'''[]: "This is my first TODO" "my first body text";
+                      [~]: "This is my second TODO" 
+                                            "my second body text"; 
+                      [~]: "This is my last TODO"
+                      "My last body text";
+                      ''';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
+      TokenKind.semicolon,
+      TokenKind.openingSquareBracket,
+      TokenKind.tilde,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.issueText,
       TokenKind.semicolon,
     ];
     assertTokens(result, expected);

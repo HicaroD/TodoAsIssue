@@ -1,18 +1,12 @@
 import 'package:todo_as_issue/api/opensource_platform.dart';
-import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
 import 'package:todo_as_issue/parser/todo.dart';
 import 'package:todo_as_issue/utils/configuration.dart';
 
 class GitLab extends IOpenSourcePlatform {
-  GitLab._internal();
-  static final GitLab _singleton = GitLab._internal();
+  final IHttpClient httpClient;
 
-  factory GitLab() {
-    return _singleton;
-  }
-
-  final HttpClient _httpClient = HttpClient(baseUrl: "gitlab.com");
+  GitLab(this.httpClient);
 
   Map<String, String> getHeaders(Configuration configuration) {
     return {
@@ -27,9 +21,10 @@ class GitLab extends IOpenSourcePlatform {
     Map<String, String> headers = getHeaders(configuration);
     Map<String, String> queryParameters = {
       "title": todo.title,
+      "description": todo.body,
     };
     String url = "api/v4/projects/${configuration.repoIdGitlab}/issues";
-    HttpResponse response = await _httpClient.post(
+    HttpResponse response = await httpClient.post(
       url,
       headers: headers,
       body: {},
