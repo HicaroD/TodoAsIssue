@@ -4,6 +4,7 @@ import 'package:todo_as_issue/api/api.dart';
 import 'package:todo_as_issue/api/github.dart';
 import 'package:todo_as_issue/api/gitlab.dart';
 import 'package:todo_as_issue/api/opensource_platform.dart';
+import 'package:todo_as_issue/core/errors/api_exceptions.dart';
 import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
 import 'package:todo_as_issue/lexer/lexer.dart';
@@ -36,8 +37,18 @@ class TodoAsIssue {
 
     API api = API(openSourcePlatform);
 
-    final successfulMessage = api.createIssues(todos, configuration);
-    print(successfulMessage);
+    try {
+      final successfulMessage = api.createIssues(todos, configuration);
+      print(successfulMessage);
+    } on InvalidCredentials catch (e) {
+      print(e.message);
+    } on ServiceUnavaiable catch (e) {
+      print(e.message);
+    } on SpammedCommand catch (e) {
+      print(e.message);
+    } on UnexpectedError catch (e) {
+      print(e.message);
+    }
   }
 }
 
