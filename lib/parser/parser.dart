@@ -1,6 +1,5 @@
 import 'package:todo_as_issue/core/errors/parser_exceptions.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
-import 'package:todo_as_issue/parser/error_reporter.dart';
 import 'package:todo_as_issue/parser/todo.dart';
 
 class TokenIterator implements Iterator {
@@ -29,7 +28,6 @@ class TokenIterator implements Iterator {
 
 class Parser {
   final List<Token> tokens;
-  ErrorReporter errorReporter = ErrorReporter();
 
   Parser(this.tokens);
 
