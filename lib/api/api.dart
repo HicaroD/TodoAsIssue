@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:todo_as_issue/api/opensource_platform.dart';
+import 'package:todo_as_issue/api/successful_status.dart';
+import 'package:todo_as_issue/core/errors/api_exceptions.dart';
 import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
 
 import '../parser/todo.dart';
@@ -15,7 +17,8 @@ class API {
     _openSourcePlatform = openSourcePlatform;
   }
 
-  void createIssues(List<Todo> todos, Configuration configuration) async {
+  Future<SuccessfulStatus> createIssues(
+      List<Todo> todos, Configuration configuration) async {
     int issueCounter = 0;
 
     for (Todo todo in todos) {
@@ -29,40 +32,23 @@ class API {
         sleep(Duration(seconds: 2));
       }
     }
-    showSuccessfulMessage(issueCounter);
+    return SuccessfulStatus(issueCounter);
   }
 
   void handleErrorStatusCode(HttpResponse response) {
-    // TODO: refactor
     switch (response.statusCode) {
       case 401:
       case 404:
-        {
-          print(
-              "Error: Check if your token and other credentials from 'todo.json' are correct and valid");
-        }
-        break;
-
+        throw InvalidCredentials(
+            "Make sure your credentials from 'todo.json' are correct and valid");
       case 503:
-        {
-          print("Error: Service unavaiable. Try again later.");
-        }
-        break;
-
+        throw ServiceUnavaiable("Service unavaiable. Please try again later.");
       case 422:
-        {
-          print("Error: this command has been spammed. Try again later.");
-        }
-        break;
-    }
-    exit(1);
-  }
-
-  void showSuccessfulMessage(int issueCounter) {
-    if (issueCounter == 1) {
-      print("🎉 A issue was created successfully 🎉");
-    } else {
-      print("🎉 $issueCounter issues were created successfully 🎉");
+        throw SpammedCommand(
+            "This command was probably spammed or you already made this pull request");
+      default:
+        // TODO(hicaro): improving error reporting for this case
+        throw UnexpectedError(response.body.toString());
     }
   }
 }

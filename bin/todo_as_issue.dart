@@ -1,13 +1,17 @@
 import 'dart:io';
+
 import 'package:todo_as_issue/api/api.dart';
 import 'package:todo_as_issue/api/github.dart';
 import 'package:todo_as_issue/api/gitlab.dart';
 import 'package:todo_as_issue/api/opensource_platform.dart';
+import 'package:todo_as_issue/core/http_client/http_client.dart';
+import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
 import 'package:todo_as_issue/lexer/lexer.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
 import 'package:todo_as_issue/parser/parser.dart';
 import 'package:todo_as_issue/parser/todo.dart';
 import 'package:todo_as_issue/utils/configuration.dart';
+import 'package:todo_as_issue/utils/endpoints.dart';
 import 'package:todo_as_issue/utils/reader.dart';
 
 class TodoAsIssue {
@@ -32,14 +36,18 @@ class TodoAsIssue {
 
     API api = API(openSourcePlatform);
 
-    api.createIssues(todos, configuration);
+    final successfulMessage = api.createIssues(todos, configuration);
+    print(successfulMessage);
   }
 }
 
 IOpenSourcePlatform getOpenSourcePlatform(Configuration configuration) {
-  IOpenSourcePlatform openSourcePlatform = GitHub();
+  IHttpClient httpClient = HttpClient(baseUrl: GITHUB_BASE_URL);
+  IOpenSourcePlatform openSourcePlatform = GitHub(httpClient);
+
   if (configuration.platform == "gitlab") {
-    openSourcePlatform = GitLab();
+    httpClient = HttpClient(baseUrl: GITLAB_BASE_URL);
+    openSourcePlatform = GitLab(httpClient);
   } else if (configuration.platform != "github") {
     print("Unsupported platform '${configuration.platform}'");
     exit(1);
