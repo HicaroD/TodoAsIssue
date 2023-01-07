@@ -1,3 +1,4 @@
+import 'package:todo_as_issue/core/errors/parser_exceptions.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
 import 'package:todo_as_issue/parser/error_reporter.dart';
 import 'package:todo_as_issue/parser/todo.dart';
@@ -22,7 +23,7 @@ class TokenIterator implements Iterator {
   }
 
   bool hasNext() {
-    return cursor < tokens.length;
+    return cursor < tokens.length - 1;
   }
 }
 
@@ -37,42 +38,31 @@ class Parser {
     TokenIterator iterator = TokenIterator(tokens);
 
     while (iterator.hasNext()) {
-      if (iterator.current.kind != TokenKind.openingSquareBracket) {
-        errorReporter.reportError(iterator.current);
-      }
+      throwErrorIfDoesntMatch(iterator, TokenKind.openingSquareBracket);
       iterator.moveNext();
 
       bool wasPosted = false;
-      if (iterator.current.kind == TokenKind.tilde) {
+      if (match(iterator, TokenKind.tilde)) {
         wasPosted = true;
         iterator.moveNext();
       }
 
-      if (iterator.current.kind != TokenKind.closingSquareBracket) {
-        errorReporter.reportError(iterator.current);
-      }
+      throwErrorIfDoesntMatch(iterator, TokenKind.closingSquareBracket);
       iterator.moveNext();
 
-      if (iterator.current.kind != TokenKind.colon) {
-        errorReporter.reportError(iterator.current);
-      }
+      throwErrorIfDoesntMatch(iterator, TokenKind.colon);
       iterator.moveNext();
 
-      if (iterator.current.kind != TokenKind.issueText) {
-        errorReporter.reportError(iterator.current);
-      }
+      throwErrorIfDoesntMatch(iterator, TokenKind.issueText);
       String issueTitle = iterator.current.lexeme;
       iterator.moveNext();
 
       String issueBodyText = "";
-      if (iterator.current.kind == TokenKind.issueText) {
+      if (match(iterator, TokenKind.issueText)) {
         issueBodyText = iterator.current.lexeme;
         iterator.moveNext();
       }
-
-      if (iterator.current.kind != TokenKind.semicolon) {
-        errorReporter.reportError(iterator.current);
-      }
+      throwErrorIfDoesntMatch(iterator, TokenKind.semicolon);
 
       if (iterator.hasNext()) iterator.moveNext();
 
@@ -81,5 +71,15 @@ class Parser {
       todos.add(todo);
     }
     return todos;
+  }
+
+  void throwErrorIfDoesntMatch(TokenIterator iterator, TokenKind expected) {
+    if (iterator.current.kind != expected) {
+      throw UnexpectedToken(iterator.current.toString());
+    }
+  }
+
+  bool match(TokenIterator iterator, TokenKind expected) {
+    return iterator.current.kind == expected;
   }
 }
