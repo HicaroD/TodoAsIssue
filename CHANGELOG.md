@@ -38,3 +38,7 @@
 - Test: Writing tests for lexer, parser and API
 - Feature: Issues can also have an optional body text
 - Docs: Improving documentation with examples
+
+## 1.3.1
+
+- Fix: Problem when trying to print successful message
