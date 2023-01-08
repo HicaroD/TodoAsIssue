@@ -38,8 +38,8 @@ class TodoAsIssue {
     API api = API(openSourcePlatform);
 
     try {
-      final successfulMessage = api.createIssues(todos, configuration);
-      print(successfulMessage);
+      final successfulMessage = await api.createIssues(todos, configuration);
+      successfulMessage.showSuccessfulMessage();
     } on InvalidCredentials catch (e) {
       print(e.message);
     } on ServiceUnavaiable catch (e) {
