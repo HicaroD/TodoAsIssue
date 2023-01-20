@@ -116,8 +116,8 @@ That command will look for `todo.json` and `todo.txt` on project's root director
    -  [`lib/utils/reader.dart`](./lib/utils/reader.dart): Helper class for reading importants files (`todo.json` and `todo.txt`)
 -  [`test`](./test/): Folder for storing all tests
    - [`test/mocks/`](./test/mocks/): Folder for defining some mocks for helping me to test the code.
-      - [`test/mocks/configuration_mock.dart`]: File for storing a mock object of `Configuration`.
-      - [`test/mocks/todo_mocks.dart`]: File for storing a list of mock TODOs.
+      - [`test/mocks/configuration_mock.dart`](./test/mocks/configuration_mock.dart): File for storing a mock object of `Configuration`.
+      - [`test/mocks/todo_mocks.dart`](./test/mocks/todo_mocks.dart): File for storing a list of mock TODOs.
    - [`test/api_test.dart`](./test/api_test.dart): Unit test for API communication.
    - [`test/lexer_test.dart`](./test/lexer_test.dart): Unit test for lexer
    - [`test/parser_test.dart`](./test/parser_test.dart): Unit test for parser
