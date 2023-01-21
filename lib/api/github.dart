@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'opensource_platform.dart';
 import '../parser/todo.dart';
 import '../utils/configuration.dart';
@@ -21,16 +23,23 @@ class GitHub extends IOpenSourcePlatform {
     return "/repos/${configuration.owner}/${configuration.repoNameGitHub}/issues";
   }
 
+  Map<String, String> getBody(Todo todo) {
+    Map<String, String> body = {
+      "title": todo.title,
+      "body": todo.body,
+    };
+    if (todo.labels.isNotEmpty) {
+      body.putIfAbsent("labels", () => jsonEncode(todo.labels));
+    }
+    return body;
+  }
+
   @override
   Future<HttpResponse> createIssue(
       Todo todo, Configuration configuration) async {
     String url = getUrl(configuration);
     Map<String, String> headers = getHeaders(configuration);
-    Map<String, String> body = {
-      "title": todo.title,
-      "body": todo.body,
-      "labels": todo.labels.toString(),
-    };
+    Map<String, String> body = getBody(todo);
 
     HttpResponse response = await httpClient.post(
       url,

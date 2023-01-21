@@ -34,6 +34,7 @@ class TodoAsIssue {
     try {
       lexer = Lexer(todoFile);
       List<Token> tokens = lexer.tokenize();
+
       parser = Parser(tokens);
       List<Todo> todos = parser.parse();
 
