@@ -150,6 +150,92 @@ void main() {
     ];
     assertTokens(result, expected);
   });
+
+  test(
+      "should be a valid incompleted TODO without body text and with one label",
+      () {
+    final input = '[]: "This is my first TODO" {"my-label-name"};';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.openingCurlyBrace,
+      TokenKind.issueText,
+      TokenKind.closingCurlyBrace,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test(
+      "should be a valid incompleted TODO without body text and with two labels",
+      () {
+    final input =
+        '[]: "This is my first TODO" {"my-label-name", "my-other-label-name"};';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.openingCurlyBrace,
+      TokenKind.issueText,
+      TokenKind.comma,
+      TokenKind.issueText,
+      TokenKind.closingCurlyBrace,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test(
+      "should be a valid incompleted TODO without body text and with empty label list",
+      () {
+    final input = '[]: "This is my first TODO" {};';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.openingCurlyBrace,
+      TokenKind.closingCurlyBrace,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
+
+  test(
+      "should be a valid incompleted TODO without body text and with one label",
+      () {
+    final input = '[]:\n"This is my first TODO" \n{\n\t "unique-label"\t\n};';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.openingCurlyBrace,
+      TokenKind.issueText,
+      TokenKind.closingCurlyBrace,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
 }
 
 void assertTokens(List<Token> result, List<TokenKind> expected) {

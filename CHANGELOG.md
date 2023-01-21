@@ -42,3 +42,9 @@
 ## 1.3.1
 
 - Fix: Problem when trying to print successful message
+
+## 1.3.2
+
+- Feature: Issues can also have a list of labels
+- Refactor: Extracting some methods on API communication code
+- Docs: Fixing some problems with links and documenting new feature

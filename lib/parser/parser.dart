@@ -1,6 +1,6 @@
-import 'package:todo_as_issue/core/errors/parser_exceptions.dart';
-import 'package:todo_as_issue/lexer/tokens.dart';
-import 'package:todo_as_issue/parser/todo.dart';
+import '../core/errors/parser_exceptions.dart';
+import '../lexer/tokens.dart';
+import 'todo.dart';
 
 class TokenIterator implements Iterator {
   final List<Token> tokens;
@@ -36,44 +36,79 @@ class Parser {
     TokenIterator iterator = TokenIterator(tokens);
 
     while (iterator.hasNext()) {
-      throwErrorIfDoesntMatch(iterator, TokenKind.openingSquareBracket);
-      iterator.moveNext();
-
-      bool wasPosted = false;
-      if (match(iterator, TokenKind.tilde)) {
-        wasPosted = true;
+      try {
+        throwErrorIfDoesntMatch(iterator, TokenKind.openingSquareBracket);
         iterator.moveNext();
-      }
 
-      throwErrorIfDoesntMatch(iterator, TokenKind.closingSquareBracket);
-      iterator.moveNext();
+        bool wasPosted = false;
+        if (match(iterator, TokenKind.tilde)) {
+          wasPosted = true;
+          iterator.moveNext();
+        }
 
-      throwErrorIfDoesntMatch(iterator, TokenKind.colon);
-      iterator.moveNext();
-
-      throwErrorIfDoesntMatch(iterator, TokenKind.issueText);
-      String issueTitle = iterator.current.lexeme;
-      iterator.moveNext();
-
-      String issueBodyText = "";
-      if (match(iterator, TokenKind.issueText)) {
-        issueBodyText = iterator.current.lexeme;
+        throwErrorIfDoesntMatch(iterator, TokenKind.closingSquareBracket);
         iterator.moveNext();
+
+        throwErrorIfDoesntMatch(iterator, TokenKind.colon);
+        iterator.moveNext();
+
+        throwErrorIfDoesntMatch(iterator, TokenKind.issueText);
+        String issueTitle = iterator.current.lexeme;
+        iterator.moveNext();
+
+        String issueBodyText = "";
+        if (match(iterator, TokenKind.issueText)) {
+          issueBodyText = iterator.current.lexeme;
+          iterator.moveNext();
+        }
+
+        List<String> labels = [];
+        if (match(iterator, TokenKind.openingCurlyBrace)) {
+          labels = parseLabels(iterator);
+        }
+
+        throwErrorIfDoesntMatch(iterator, TokenKind.semicolon);
+
+        if (iterator.hasNext()) iterator.moveNext();
+
+        final todo = Todo(
+          wasPosted: wasPosted,
+          title: issueTitle,
+          body: issueBodyText,
+          labels: labels,
+        );
+        todos.add(todo);
+      } catch (error) {
+        rethrow;
       }
-      throwErrorIfDoesntMatch(iterator, TokenKind.semicolon);
-
-      if (iterator.hasNext()) iterator.moveNext();
-
-      final todo =
-          Todo(wasPosted: wasPosted, title: issueTitle, body: issueBodyText);
-      todos.add(todo);
     }
     return todos;
   }
 
+  List<String> parseLabels(TokenIterator iterator) {
+    final labels = <String>[];
+    iterator.moveNext();
+
+    while (iterator.hasNext()) {
+      if (match(iterator, TokenKind.closingCurlyBrace)) {
+        iterator.moveNext();
+        break;
+      }
+
+      throwErrorIfDoesntMatch(iterator, TokenKind.issueText);
+      labels.add(iterator.current.lexeme);
+      iterator.moveNext();
+
+      if (match(iterator, TokenKind.comma)) {
+        iterator.moveNext();
+      }
+    }
+    return labels;
+  }
+
   void throwErrorIfDoesntMatch(TokenIterator iterator, TokenKind expected) {
     if (iterator.current.kind != expected) {
-      throw UnexpectedToken(iterator.current.toString());
+      throw UnexpectedToken(iterator.current.lexeme);
     }
   }
 
