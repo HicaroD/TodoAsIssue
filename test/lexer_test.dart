@@ -215,6 +215,27 @@ void main() {
 
     assertTokens(result, expected);
   });
+
+  test(
+      "should be a valid incompleted TODO without body text and with one label",
+      () {
+    final input = '[]:\n"This is my first TODO" \n{\n\t "unique-label"\t\n};';
+    final lexer = Lexer(input);
+    final result = lexer.tokenize();
+
+    final expected = [
+      TokenKind.openingSquareBracket,
+      TokenKind.closingSquareBracket,
+      TokenKind.colon,
+      TokenKind.issueText,
+      TokenKind.openingCurlyBrace,
+      TokenKind.issueText,
+      TokenKind.closingCurlyBrace,
+      TokenKind.semicolon,
+    ];
+
+    assertTokens(result, expected);
+  });
 }
 
 void assertTokens(List<Token> result, List<TokenKind> expected) {

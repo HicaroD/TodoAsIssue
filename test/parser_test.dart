@@ -299,7 +299,7 @@ void main() {
     assertTodo(todos[0], expected);
   });
 
-  test("should be a single valid TODO with two label", () {
+  test("should be a single valid TODO with two labels", () {
     final input = [
       Token(TokenKind.openingSquareBracket, '['),
       Token(TokenKind.closingSquareBracket, ']'),
