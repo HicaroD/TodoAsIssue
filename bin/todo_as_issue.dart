@@ -70,9 +70,9 @@ IOpenSourcePlatform getOpenSourcePlatform(Configuration configuration) {
 }
 
 void main(List<String> args) async {
-  String todoFilePath = "${Directory.current.path}/todo.txt";
-  String todoFile = await Reader.getTodoFile(todoFilePath);
+  String todoFile = await Reader.getTodoFile();
   Map<String, dynamic> configAsJson = await Reader.getConfigFile();
+
   Configuration configuration = Configuration.fromJson(configAsJson);
   IOpenSourcePlatform openSourcePlatform = getOpenSourcePlatform(configuration);
 

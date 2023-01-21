@@ -15,15 +15,20 @@ class GitLab extends IOpenSourcePlatform {
     };
   }
 
+  String getUrl(Configuration configuration) {
+    return "api/v4/projects/${configuration.repoIdGitlab}/issues";
+  }
+
   @override
   Future<HttpResponse> createIssue(
       Todo todo, Configuration configuration) async {
+    String url = getUrl(configuration);
     Map<String, String> headers = getHeaders(configuration);
     Map<String, String> queryParameters = {
       "title": todo.title,
       "description": todo.body,
+      "labels": todo.labels.join(","),
     };
-    String url = "api/v4/projects/${configuration.repoIdGitlab}/issues";
     HttpResponse response = await httpClient.post(
       url,
       headers: headers,

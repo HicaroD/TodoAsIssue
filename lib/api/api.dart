@@ -45,7 +45,7 @@ class API {
         throw ServiceUnavaiable("Service unavaiable. Please try again later.");
       case 422:
         throw SpammedCommand(
-            "This command was probably spammed or you already made this pull request");
+            "Validation failed or this command was probably spammed");
       default:
         // TODO(hicaro): improving error reporting for this case
         throw UnexpectedError(response.body.toString());

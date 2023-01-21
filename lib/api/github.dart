@@ -12,21 +12,24 @@ class GitHub extends IOpenSourcePlatform {
   Map<String, String> getHeaders(Configuration configuration) {
     return {
       "accept": "application/vnd.github+json",
-      "Authorization": "Bearer ${configuration.githubToken}"
+      "Authorization": "Bearer ${configuration.githubToken}",
+      "Content-Type": "application/json"
     };
+  }
+
+  String getUrl(Configuration configuration) {
+    return "/repos/${configuration.owner}/${configuration.repoNameGitHub}/issues";
   }
 
   @override
   Future<HttpResponse> createIssue(
       Todo todo, Configuration configuration) async {
-    String url =
-        "/repos/${configuration.owner}/${configuration.repoNameGitHub}/issues";
-
+    String url = getUrl(configuration);
     Map<String, String> headers = getHeaders(configuration);
-
     Map<String, String> body = {
       "title": todo.title,
       "body": todo.body,
+      "labels": todo.labels.toString(),
     };
 
     HttpResponse response = await httpClient.post(
