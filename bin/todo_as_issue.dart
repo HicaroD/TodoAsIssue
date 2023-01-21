@@ -36,7 +36,6 @@ class TodoAsIssue {
       List<Token> tokens = lexer.tokenize();
       parser = Parser(tokens);
       List<Todo> todos = parser.parse();
-      print(todos);
 
       API api = API(openSourcePlatform);
       final successfulMessage = await api.createIssues(todos, configuration);
