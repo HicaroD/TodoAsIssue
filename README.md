@@ -1,6 +1,7 @@
 # :pencil: TODOasIssue
 
 ![workflow](https://github.com/HicaroD/TodoAsIssue/actions/workflows/dart.yml/badge.svg)
+![pubdev](https://img.shields.io/pub/v/todo_as_issue)
 
 ## Summary
 
