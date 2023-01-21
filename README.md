@@ -4,13 +4,13 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
-3. [Setting up `todo.json`](#setting-up-todo.json)
+3. [Setting up `todo.json`](#setting-up-todojson)
 
    3.1. [Required fields for GitHub](#required-fields-for-github)
 
    3.2. [Required fields for GitLab](#required-fields-for-gitlab)
 
-4. [Setting up `todo.txt`](#setting-up-todo.txt)
+4. [Setting up `todo.txt`](#setting-up-todotxt)
 5. [Usage](#usage)
 6. [Project architecture](#project-architecture)
 7. [Supported platforms](#supported-platforms)
@@ -71,7 +71,7 @@ After that, you can create a file called `todo.txt` in the project root folder t
 
 Leave the remaining ones empty (empty string).
 
-### Required fields for GitHub
+### Required fields for GitLab
 
 - `repo_id_gitlab`: Your repository id
 - `platform`: It should be `gitlab`
