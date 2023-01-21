@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:todo_as_issue/api/opensource_platform.dart';
-import 'package:todo_as_issue/api/successful_status.dart';
-import 'package:todo_as_issue/core/errors/api_exceptions.dart';
-import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
+import 'opensource_platform.dart';
+import 'successful_status.dart';
+import '../core/errors/api_exceptions.dart';
+import '../core/http_client/http_client_interface.dart';
 
 import '../parser/todo.dart';
 import '../utils/configuration.dart';

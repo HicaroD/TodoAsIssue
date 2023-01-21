@@ -1,7 +1,6 @@
-import 'package:todo_as_issue/api/opensource_platform.dart';
-import 'package:todo_as_issue/parser/todo.dart';
-import 'package:todo_as_issue/utils/configuration.dart';
-import 'package:todo_as_issue/utils/endpoints.dart';
+import 'opensource_platform.dart';
+import '../parser/todo.dart';
+import '../utils/configuration.dart';
 
 import '../core/http_client/http_client_interface.dart';
 
