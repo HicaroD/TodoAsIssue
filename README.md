@@ -1,5 +1,8 @@
 # :pencil: TODOasIssue
 
+![workflow](https://github.com/HicaroD/TodoAsIssue/actions/workflows/dart.yml/badge.svg)
+![pubdev](https://img.shields.io/pub/v/todo_as_issue)
+
 ## Summary
 
 1. [Description](#description)
@@ -87,19 +90,19 @@ In the [description](#description), you have a pretty clear example on how to st
 your `todo.txt`. In this section I just want to mention a couple things.
 
 First of all, each issue can have a `title`, `body` and a `labels`. `title` is required, but
-`body` and `labels`, however you need to respect the order. For example:
+`body` and `labels` are not, however you need to respect the order. For example:
 
 ```markdown
 []: "Title of issue" "Body of issue" {"label1", "label2"};
 ```
 
-The example above is **valid** because `labels` are placed *after* `body`.
+The example above is **valid** because `labels` are placed _after_ `body`.
 
 ```markdown
 []: "Title of issue" {"label1", "label2"} "Body of issue";
 ```
 
-The example above is **invalid** because `labels` are placed *before* `body`. This order is
+The example above is **invalid** because `labels` are placed _before_ `body`. This order is
 wrong!
 
 ## Usage
@@ -118,7 +121,7 @@ That command will look for `todo.json` and `todo.txt` on project's root director
   - [`lib/api/api.dart`](./lib/api/api.dart): Class for calling method to create issues
   - [`lib/api/github.dart`](./lib/api/github.dart): Class for implementing the communication with GitHub's API to create an issue.
   - [`lib/api/gitlab.dart`](./lib/api/gitlab.dart): Class for implementing the communication with GitLab's API to create an issue.
-  - [`lib/api/opensource_platform.dart`](./lib/api/opensource_platform.dart): Interface for any open source platform that I may want to create in the future.
+    Extracting some methods on API communication code - [`lib/api/opensource_platform.dart`](./lib/api/opensource_platform.dart): Interface for any open source platform that I may want to create in the future.
   - [`./lib/api/successful_status.dart`](./lib/api/successful_status.dart): Class for getting successful message based on issue counter.
 - [`lib/core`](./lib/core/): Code that is common across all the source code.
   - [`lib/core/http_client`](./lib/core/http_client/): Implementation of an HTTP client
