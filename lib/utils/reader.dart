@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 class Reader {
-  static Future<String> getTodoFile(String filePath) async {
-    File todoFile = File(filePath);
+  static Future<String> getTodoFile() async {
+    String todoFilePath = "${Directory.current.path}/todo.txt";
+    File todoFile = File(todoFilePath);
     if (!await todoFile.exists()) {
       print("ERROR: 'todo.txt' not found");
       exit(1);

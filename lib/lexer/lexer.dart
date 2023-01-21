@@ -1,7 +1,5 @@
-import 'dart:io';
-
-import 'package:todo_as_issue/core/errors/lexer_exceptions.dart';
-import 'package:todo_as_issue/lexer/position.dart';
+import '../core/errors/lexer_exceptions.dart';
+import 'position.dart';
 
 import 'tokens.dart';
 
@@ -64,6 +62,26 @@ class Lexer {
         case ";":
           {
             tokens.add(consumeToken(TokenKind.semicolon, currentCharacter));
+            break;
+          }
+
+        case ",":
+          {
+            tokens.add(consumeToken(TokenKind.comma, currentCharacter));
+            break;
+          }
+
+        case "{":
+          {
+            tokens.add(
+                consumeToken(TokenKind.openingCurlyBrace, currentCharacter));
+            break;
+          }
+
+        case "}":
+          {
+            tokens.add(
+                consumeToken(TokenKind.closingCurlyBrace, currentCharacter));
             break;
           }
 

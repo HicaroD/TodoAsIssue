@@ -1,7 +1,8 @@
-import 'package:todo_as_issue/api/opensource_platform.dart';
-import 'package:todo_as_issue/parser/todo.dart';
-import 'package:todo_as_issue/utils/configuration.dart';
-import 'package:todo_as_issue/utils/endpoints.dart';
+import 'dart:convert';
+
+import 'opensource_platform.dart';
+import '../parser/todo.dart';
+import '../utils/configuration.dart';
 
 import '../core/http_client/http_client_interface.dart';
 
@@ -13,22 +14,32 @@ class GitHub extends IOpenSourcePlatform {
   Map<String, String> getHeaders(Configuration configuration) {
     return {
       "accept": "application/vnd.github+json",
-      "Authorization": "Bearer ${configuration.githubToken}"
+      "Authorization": "Bearer ${configuration.githubToken}",
+      "Content-Type": "application/json"
     };
+  }
+
+  String getUrl(Configuration configuration) {
+    return "/repos/${configuration.owner}/${configuration.repoNameGitHub}/issues";
+  }
+
+  Map<String, String> getBody(Todo todo) {
+    Map<String, String> body = {
+      "title": todo.title,
+      "body": todo.body,
+    };
+    if (todo.labels.isNotEmpty) {
+      body.putIfAbsent("labels", () => jsonEncode(todo.labels));
+    }
+    return body;
   }
 
   @override
   Future<HttpResponse> createIssue(
       Todo todo, Configuration configuration) async {
-    String url =
-        "/repos/${configuration.owner}/${configuration.repoNameGitHub}/issues";
-
+    String url = getUrl(configuration);
     Map<String, String> headers = getHeaders(configuration);
-
-    Map<String, String> body = {
-      "title": todo.title,
-      "body": todo.body,
-    };
+    Map<String, String> body = getBody(todo);
 
     HttpResponse response = await httpClient.post(
       url,

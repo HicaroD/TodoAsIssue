@@ -5,6 +5,7 @@ import 'package:todo_as_issue/api/github.dart';
 import 'package:todo_as_issue/api/gitlab.dart';
 import 'package:todo_as_issue/api/opensource_platform.dart';
 import 'package:todo_as_issue/core/errors/api_exceptions.dart';
+import 'package:todo_as_issue/core/errors/parser_exceptions.dart';
 import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
 import 'package:todo_as_issue/lexer/lexer.dart';
@@ -30,14 +31,14 @@ class TodoAsIssue {
   });
 
   void run() async {
-    lexer = Lexer(todoFile);
-    List<Token> tokens = lexer.tokenize();
-    parser = Parser(tokens);
-    List<Todo> todos = parser.parse();
-
-    API api = API(openSourcePlatform);
-
     try {
+      lexer = Lexer(todoFile);
+      List<Token> tokens = lexer.tokenize();
+
+      parser = Parser(tokens);
+      List<Todo> todos = parser.parse();
+
+      API api = API(openSourcePlatform);
       final successfulMessage = await api.createIssues(todos, configuration);
       successfulMessage.showSuccessfulMessage();
     } on InvalidCredentials catch (e) {
@@ -48,6 +49,8 @@ class TodoAsIssue {
       print(e.message);
     } on UnexpectedError catch (e) {
       print(e.message);
+    } on UnexpectedToken catch (e) {
+      print("Unexpected token: '${e.token}'");
     }
   }
 }
@@ -67,9 +70,9 @@ IOpenSourcePlatform getOpenSourcePlatform(Configuration configuration) {
 }
 
 void main(List<String> args) async {
-  String todoFilePath = "${Directory.current.path}/todo.txt";
-  String todoFile = await Reader.getTodoFile(todoFilePath);
+  String todoFile = await Reader.getTodoFile();
   Map<String, dynamic> configAsJson = await Reader.getConfigFile();
+
   Configuration configuration = Configuration.fromJson(configAsJson);
   IOpenSourcePlatform openSourcePlatform = getOpenSourcePlatform(configuration);
 

@@ -7,6 +7,9 @@ enum TokenKind {
   tilde,
   number,
   semicolon,
+  openingCurlyBrace,
+  closingCurlyBrace,
+  comma,
 }
 
 class Token {

@@ -1,7 +1,7 @@
-import 'package:todo_as_issue/api/opensource_platform.dart';
-import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
-import 'package:todo_as_issue/parser/todo.dart';
-import 'package:todo_as_issue/utils/configuration.dart';
+import 'opensource_platform.dart';
+import '../core/http_client/http_client_interface.dart';
+import '../parser/todo.dart';
+import '../utils/configuration.dart';
 
 class GitLab extends IOpenSourcePlatform {
   final IHttpClient httpClient;
@@ -15,15 +15,27 @@ class GitLab extends IOpenSourcePlatform {
     };
   }
 
-  @override
-  Future<HttpResponse> createIssue(
-      Todo todo, Configuration configuration) async {
-    Map<String, String> headers = getHeaders(configuration);
+  String getUrl(Configuration configuration) {
+    return "api/v4/projects/${configuration.repoIdGitlab}/issues";
+  }
+
+  Map<String, String> getQueryParameters(Todo todo) {
     Map<String, String> queryParameters = {
       "title": todo.title,
       "description": todo.body,
+      "labels": todo.labels.join(","),
     };
-    String url = "api/v4/projects/${configuration.repoIdGitlab}/issues";
+
+    return queryParameters;
+  }
+
+  @override
+  Future<HttpResponse> createIssue(
+      Todo todo, Configuration configuration) async {
+    String url = getUrl(configuration);
+    Map<String, String> headers = getHeaders(configuration);
+    Map<String, String> queryParameters = getQueryParameters(todo);
+
     HttpResponse response = await httpClient.post(
       url,
       headers: headers,
