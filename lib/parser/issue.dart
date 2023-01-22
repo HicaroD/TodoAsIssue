@@ -1,10 +1,10 @@
-class Todo {
+class Issue {
   final bool wasPosted;
   final String title;
   final String body;
   final List<String> labels;
 
-  Todo({
+  Issue({
     required this.wasPosted,
     required this.title,
     required this.body,
