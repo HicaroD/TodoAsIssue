@@ -1,6 +1,6 @@
 import '../core/errors/parser_exceptions.dart';
 import '../lexer/tokens.dart';
-import 'todo.dart';
+import 'issue.dart';
 
 class TokenIterator implements Iterator {
   final List<Token> tokens;
@@ -31,8 +31,8 @@ class Parser {
 
   Parser(this.tokens);
 
-  List<Todo> parse() {
-    List<Todo> todos = [];
+  List<Issue> parse() {
+    List<Issue> issues = [];
     TokenIterator iterator = TokenIterator(tokens);
 
     while (iterator.hasNext()) {
@@ -71,18 +71,18 @@ class Parser {
 
         if (iterator.hasNext()) iterator.moveNext();
 
-        final todo = Todo(
+        final issue = Issue(
           wasPosted: wasPosted,
           title: issueTitle,
           body: issueBodyText,
           labels: labels,
         );
-        todos.add(todo);
+        issues.add(issue);
       } catch (error) {
         rethrow;
       }
     }
-    return todos;
+    return issues;
   }
 
   List<String> parseLabels(TokenIterator iterator) {

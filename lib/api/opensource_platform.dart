@@ -1,8 +1,8 @@
 import '../core/http_client/http_client_interface.dart';
 import '../utils/configuration.dart';
 
-import '../parser/todo.dart';
+import '../parser/issue.dart';
 
 abstract class IOpenSourcePlatform {
-  Future<HttpResponse> createIssue(Todo todo, Configuration configuration);
+  Future<HttpResponse> createIssue(Issue issue, Configuration configuration);
 }

@@ -1,3 +1,5 @@
+import 'http_status.dart';
+
 abstract class IHttpClient {
   Future<HttpResponse> get(
     String url, {
@@ -20,7 +22,7 @@ abstract class IHttpClient {
 
 class HttpResponse {
   Map<String, dynamic> body;
-  int statusCode;
+  HttpStatus statusCode;
 
   HttpResponse({
     required this.body,
