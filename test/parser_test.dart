@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import 'package:todo_as_issue/core/errors/parser_exceptions.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
 import 'package:todo_as_issue/parser/parser.dart';
-import 'package:todo_as_issue/parser/todo.dart';
+import 'package:todo_as_issue/parser/issue.dart';
 
 void main() {
   test("should be a single valid TODO", () {
@@ -16,7 +16,7 @@ void main() {
 
     final parser = Parser(input);
     final todos = parser.parse();
-    final expected = Todo(
+    final expected = Issue(
       wasPosted: false,
       title: "Issue name",
       body: "",
@@ -49,7 +49,7 @@ void main() {
 
     final parser = Parser(input);
     final todos = parser.parse();
-    final expected = Todo(
+    final expected = Issue(
       wasPosted: false,
       title: "Issue name",
       body: "My body text",
@@ -84,7 +84,7 @@ void main() {
 
     final parser = Parser(input);
     final todos = parser.parse();
-    final expected = Todo(
+    final expected = Issue(
       wasPosted: true,
       title: "Issue name",
       body: "",
@@ -121,7 +121,7 @@ void main() {
 
     final parser = Parser(input);
     final todos = parser.parse();
-    final expected = Todo(
+    final expected = Issue(
       wasPosted: true,
       title: "Issue name",
       body: "This is the best body text ever",
@@ -169,19 +169,19 @@ void main() {
     final parser = Parser(input);
     final todos = parser.parse();
     final expected = [
-      Todo(
+      Issue(
         wasPosted: true,
         title: "My first completed TODO",
         body: "",
         labels: [],
       ),
-      Todo(
+      Issue(
         wasPosted: false,
         title: "My second TODO",
         body: "",
         labels: [],
       ),
-      Todo(
+      Issue(
         wasPosted: false,
         title: "My last TODO",
         body: "",
@@ -221,19 +221,19 @@ void main() {
     final parser = Parser(input);
     final todos = parser.parse();
     final expected = [
-      Todo(
+      Issue(
         wasPosted: true,
         title: "My first completed TODO",
         body: "My first body text",
         labels: [],
       ),
-      Todo(
+      Issue(
         wasPosted: false,
         title: "My second TODO",
         body: "My second body text",
         labels: [],
       ),
-      Todo(
+      Issue(
         wasPosted: false,
         title: "My last TODO",
         body: "My last body text",
@@ -263,7 +263,7 @@ void main() {
 
     final parser = Parser(input);
     final todos = parser.parse();
-    final expected = Todo(
+    final expected = Issue(
       wasPosted: false,
       title: "Issue name",
       body: "",
@@ -288,7 +288,7 @@ void main() {
 
     final parser = Parser(input);
     final todos = parser.parse();
-    final expected = Todo(
+    final expected = Issue(
       wasPosted: false,
       title: "Issue name",
       body: "",
@@ -316,7 +316,7 @@ void main() {
 
     final parser = Parser(input);
     final todos = parser.parse();
-    final expected = Todo(
+    final expected = Issue(
       wasPosted: false,
       title: "Issue name",
       body: "",
@@ -328,7 +328,7 @@ void main() {
   });
 }
 
-void assertTodo(Todo result, Todo expected) {
+void assertTodo(Issue result, Issue expected) {
   assert(result.title == expected.title);
   assert(result.wasPosted == expected.wasPosted);
   assert(result.body == expected.body);

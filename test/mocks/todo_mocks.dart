@@ -1,13 +1,13 @@
-import 'package:todo_as_issue/parser/todo.dart';
+import 'package:todo_as_issue/parser/issue.dart';
 
-List<Todo> TODOS_MOCK = [
-  Todo(
+List<Issue> ISSUE_MOCKS = [
+  Issue(
     wasPosted: false,
     title: "first TODO",
     body: "My first TODO body text",
     labels: [],
   ),
-  Todo(
+  Issue(
     wasPosted: false,
     title: "last TODO",
     body: "My second TODO body text",

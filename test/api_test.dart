@@ -6,6 +6,7 @@ import 'package:todo_as_issue/api/successful_status.dart';
 import 'package:todo_as_issue/core/errors/api_exceptions.dart';
 import 'package:todo_as_issue/core/http_client/http_client.dart';
 import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
+import 'package:todo_as_issue/core/http_client/http_status.dart';
 
 import 'mocks/configuration_mock.dart';
 import 'mocks/todo_mocks.dart';
@@ -30,15 +31,18 @@ void main() {
           url,
           headers: any(named: "headers"),
           body: any(named: "body"),
-        )).thenAnswer((_) async => HttpResponse(body: {}, statusCode: 201));
+        )).thenAnswer((_) async => HttpResponse(
+          body: {},
+          statusCode: HttpStatus.CREATED,
+        ));
 
     final issues =
-        await api.createIssues(TODOS_MOCK, GITHUB_CONFIGURATION_MOCK);
+        await api.createIssues(ISSUE_MOCKS, GITHUB_CONFIGURATION_MOCK);
     expect(issues, isA<SuccessfulStatus>());
 
     verify((() => httpClientMock.post(url,
         headers: any(named: "headers"),
-        body: any(named: "body")))).called(TODOS_MOCK.length);
+        body: any(named: "body")))).called(ISSUE_MOCKS.length);
   });
 
   test("should throw InvalidCredentials exception when HTTP status is 401",
@@ -47,10 +51,13 @@ void main() {
           url,
           headers: any(named: "headers"),
           body: any(named: "body"),
-        )).thenAnswer((_) async => HttpResponse(body: {}, statusCode: 401));
+        )).thenAnswer((_) async => HttpResponse(
+          body: {},
+          statusCode: HttpStatus.UNAUTHORIZED,
+        ));
 
     expect(
-      () async => api.createIssues(TODOS_MOCK, GITHUB_CONFIGURATION_MOCK),
+      () async => api.createIssues(ISSUE_MOCKS, GITHUB_CONFIGURATION_MOCK),
       throwsA(isA<InvalidCredentials>()),
     );
 
@@ -64,10 +71,13 @@ void main() {
           url,
           headers: any(named: "headers"),
           body: any(named: "body"),
-        )).thenAnswer((_) async => HttpResponse(body: {}, statusCode: 404));
+        )).thenAnswer((_) async => HttpResponse(
+          body: {},
+          statusCode: HttpStatus.NOT_FOUND,
+        ));
 
     expect(
-      () async => api.createIssues(TODOS_MOCK, GITHUB_CONFIGURATION_MOCK),
+      () async => api.createIssues(ISSUE_MOCKS, GITHUB_CONFIGURATION_MOCK),
       throwsA(isA<InvalidCredentials>()),
     );
 
@@ -81,10 +91,13 @@ void main() {
           url,
           headers: any(named: "headers"),
           body: any(named: "body"),
-        )).thenAnswer((_) async => HttpResponse(body: {}, statusCode: 503));
+        )).thenAnswer((_) async => HttpResponse(
+          body: {},
+          statusCode: HttpStatus.SERVICE_UNAVAILABLE,
+        ));
 
     expect(
-      () async => api.createIssues(TODOS_MOCK, GITHUB_CONFIGURATION_MOCK),
+      () async => api.createIssues(ISSUE_MOCKS, GITHUB_CONFIGURATION_MOCK),
       throwsA(isA<ServiceUnavaiable>()),
     );
 
@@ -98,10 +111,13 @@ void main() {
           url,
           headers: any(named: "headers"),
           body: any(named: "body"),
-        )).thenAnswer((_) async => HttpResponse(body: {}, statusCode: 422));
+        )).thenAnswer((_) async => HttpResponse(
+          body: {},
+          statusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+        ));
 
     expect(
-      () async => api.createIssues(TODOS_MOCK, GITHUB_CONFIGURATION_MOCK),
+      () async => api.createIssues(ISSUE_MOCKS, GITHUB_CONFIGURATION_MOCK),
       throwsA(isA<SpammedCommand>()),
     );
 
@@ -116,10 +132,13 @@ void main() {
           url,
           headers: any(named: "headers"),
           body: any(named: "body"),
-        )).thenAnswer((_) async => HttpResponse(body: {}, statusCode: 504));
+        )).thenAnswer((_) async => HttpResponse(
+          body: {},
+          statusCode: HttpStatus.GATEWAY_TIMEOUT,
+        ));
 
     expect(
-      () async => api.createIssues(TODOS_MOCK, GITHUB_CONFIGURATION_MOCK),
+      () async => api.createIssues(ISSUE_MOCKS, GITHUB_CONFIGURATION_MOCK),
       throwsA(isA<UnexpectedError>()),
     );
 
