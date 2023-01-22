@@ -11,7 +11,7 @@ import 'package:todo_as_issue/core/http_client/http_client_interface.dart';
 import 'package:todo_as_issue/lexer/lexer.dart';
 import 'package:todo_as_issue/lexer/tokens.dart';
 import 'package:todo_as_issue/parser/parser.dart';
-import 'package:todo_as_issue/parser/todo.dart';
+import 'package:todo_as_issue/parser/issue.dart';
 import 'package:todo_as_issue/utils/configuration.dart';
 import 'package:todo_as_issue/utils/endpoints.dart';
 import 'package:todo_as_issue/utils/reader.dart';
@@ -36,10 +36,10 @@ class TodoAsIssue {
       List<Token> tokens = lexer.tokenize();
 
       parser = Parser(tokens);
-      List<Todo> todos = parser.parse();
+      List<Issue> issues = parser.parse();
 
       API api = API(openSourcePlatform);
-      final successfulMessage = await api.createIssues(todos, configuration);
+      final successfulMessage = await api.createIssues(issues, configuration);
       successfulMessage.showSuccessfulMessage();
     } on InvalidCredentials catch (e) {
       print(e.message);
